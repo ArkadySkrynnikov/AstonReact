@@ -1,0 +1,60 @@
+const Configuration = {
+    extends: ['@commitlint/config-conventional'],
+
+    parserPreset: 'conventional-changelog-atom',
+
+    formatter: '@commitlint/format',
+    //type(scope?): subject
+    //#scope is optional;
+    //multiple scopes are supported (current delimiter options: "/", "\" and ",")
+    rules: {
+        // Тело коммита должно начинаться с пустой строки
+        'body-leading-blank': [2, 'always'],
+
+        // Нижний колонтитул коммита должен начинаться с пустой строки
+        'footer-leading-blank': [2, 'always'],
+
+        // Максимальная длина заголовка 72 символа
+        'header-max-length': [2, 'always', 72],
+
+        // Область всегда только в нижнем регистре
+        'scope-case': [2, 'always', 'lower-case'],
+
+        // Описание не может быть пустым
+        'subject-empty': [2, 'never'],
+
+        // Описание не должно заканчиваться '.'
+        'subject-full-stop': [2, 'never', '.'],
+
+        // Тип всегда только в нижнем регистре
+        'type-case': [2, 'always', 'lower-case'],
+        // Тип не может быть пустым
+        'type-empty': [2, 'never'],
+        // Перечислим все возможные варианты коммитов
+        //type
+        'type-enum': [
+            2,
+            'always',
+            [
+                'build',
+                'ci',
+                'docs',
+                'feat',
+                'fix',
+                'perf',
+                'refactor',
+                'revert',
+                'style',
+                'test',
+            ],
+        ],
+    },
+    ignores: [(commit) => commit === ''],
+
+    defaultIgnores: true,
+
+    helpUrl:
+        'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+}
+
+export default Configuration

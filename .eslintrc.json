@@ -31,6 +31,7 @@
         "react/prop-types": 0, // Отключаем правило проверки передаваемых типов.
         "react/react-in-jsx-scope": "off"
     },
+    "ignorePatterns": ["!.*", "dist", "node_modules"],
     "settings": {
         "react": {
             "version": "detect"
