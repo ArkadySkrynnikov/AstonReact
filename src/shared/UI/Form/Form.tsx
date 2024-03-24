@@ -9,6 +9,7 @@ export interface IForm {
     email: string
     password: string
     username?: string
+    copyPassword?: string
 }
 
 export interface Props {

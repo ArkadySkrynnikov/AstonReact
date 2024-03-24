@@ -24,6 +24,7 @@ export const AuthorizationField = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
+    gap: 10px;
 `
 
 export const Input = styled.input`
@@ -56,6 +57,11 @@ export const Label = styled.label`
         font-size: 14px;
         color: black;
     }
+`
+
+export const ErrorField = styled.span`
+    font-size: 13px;
+    text-align: center;
 `
 
 export const Button = styled.button`

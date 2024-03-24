@@ -1,14 +1,20 @@
-import { Navigate } from 'react-router-dom'
-import { FC } from 'react'
-import { useAppSelector } from '../../shared/hooks/redux-hooks.ts'
+import { useNavigate } from 'react-router-dom'
+import { FunctionComponent, ReactElement, useEffect } from 'react'
 
-type Props = {
-    Component: FC
+interface IPrivateRoutesProps {
+    component: ReactElement
 }
 
-const PrivateRoute: FC<Props> = ({ Component }) => {
-    const { isAuth } = useAppSelector((state) => state.userStore.user)
+export const PrivateRoute: FunctionComponent<IPrivateRoutesProps> = ({
+    component,
+}) => {
+    const navigate = useNavigate()
+    const isAuthenticated = localStorage.getItem('isAuthenticated')
+    useEffect(() => {
+        if (!isAuthenticated) {
+            navigate('/login')
+        }
+    }, [isAuthenticated, navigate])
 
-    return isAuth ? <Component /> : <Navigate to='/login' />
+    return component
 }
-export default PrivateRoute

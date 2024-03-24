@@ -1,16 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-type InitialStateType = {
-    user: {
-        isAuth: boolean
-        email: string | null
-        username: string | null
-        token: string | null
-        id: string | null
-    }
+interface User {
+    isAuth: boolean
+    email: string | null
+    username: string | null
+    token: string | null
+    id: string | null
 }
 
-const initialUserState: InitialStateType = {
+interface UserState {
+    user: User
+    emailError: string | null
+    passwordError: string | null
+    userIsNotDefined: boolean
+}
+
+const initialUserState: UserState = {
     user: {
         isAuth: false,
         email: null,
@@ -18,6 +23,9 @@ const initialUserState: InitialStateType = {
         token: null,
         id: null,
     },
+    emailError: null,
+    passwordError: null,
+    userIsNotDefined: false,
 }
 
 const userSlice = createSlice({
@@ -27,11 +35,28 @@ const userSlice = createSlice({
         setUser(state, action) {
             state.user = action.payload
         },
+        setEmailError(state, action) {
+            state.emailError = action.payload
+        },
+        setPasswordError(state, action) {
+            state.passwordError = action.payload
+        },
+        setUserIsNotDefined(state) {
+            state.userIsNotDefined = true
+        },
         removeUser(state) {
             state.user = initialUserState.user
+            localStorage.removeItem('user')
+            localStorage.removeItem('isAuthenticated')
         },
     },
 })
 
-export const { setUser, removeUser } = userSlice.actions
+export const {
+    setUser,
+    setEmailError,
+    setPasswordError,
+    setUserIsNotDefined,
+    removeUser,
+} = userSlice.actions
 export default userSlice.reducer

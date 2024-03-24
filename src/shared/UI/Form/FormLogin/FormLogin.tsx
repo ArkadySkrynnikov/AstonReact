@@ -2,6 +2,7 @@ import {
     AuthorizationField,
     AuthorizationForm,
     Button,
+    ErrorField,
     Input,
     Label,
     LoginWrapper,
@@ -10,8 +11,11 @@ import {
 import { Link } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { IForm, Props } from '../Form.tsx'
+import { useAppSelector } from '../../../hooks/redux-hooks.ts'
 
 const FormLogin = ({ title, onSubmit }: Props) => {
+    const { userIsNotDefined } = useAppSelector((state) => state.userStore)
+
     const {
         register,
         handleSubmit,
@@ -33,7 +37,9 @@ const FormLogin = ({ title, onSubmit }: Props) => {
                         name='email'
                         placeholder='example@mail.com'
                     />
-                    {errors.email && <span>Email is required field!</span>}
+                    {errors.email && (
+                        <ErrorField>Email is required field!</ErrorField>
+                    )}
                     <Label htmlFor='email'>Email</Label>
                 </AuthorizationField>
                 <AuthorizationField>
@@ -44,11 +50,13 @@ const FormLogin = ({ title, onSubmit }: Props) => {
                         placeholder='••••••••'
                     />
                     {errors.password && (
-                        <span>Password is required field!</span>
+                        <ErrorField>Password is required field!</ErrorField>
                     )}
                     <Label htmlFor='password'>Password</Label>
+                    {userIsNotDefined && (
+                        <ErrorField>User invalid credential</ErrorField>
+                    )}
                 </AuthorizationField>
-
                 <Button type='submit'>SUBMIT</Button>
             </AuthorizationForm>
             <Link to='/register'>Dont have account? Lets register!</Link>
