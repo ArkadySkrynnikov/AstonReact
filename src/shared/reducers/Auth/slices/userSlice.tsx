@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-interface User {
+type User = {
     isAuth: boolean
     email: string | null
     username: string | null
@@ -8,7 +8,7 @@ interface User {
     id: string | null
 }
 
-interface UserState {
+type UserState = {
     user: User
     emailError: string | null
     passwordError: string | null

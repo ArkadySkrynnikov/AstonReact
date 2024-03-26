@@ -9,8 +9,9 @@ import { useNavigate } from 'react-router-dom'
 import { SubmitHandler } from 'react-hook-form'
 import { IForm } from '../UI/Form/Form.tsx'
 import { updateProfile } from 'firebase/auth'
+import * as ROUTE_PATHS from '../../app/providers/router/routePaths/pathConstants.ts'
 
-const UseSignUp = () => {
+export const useSignUp = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -45,7 +46,7 @@ const UseSignUp = () => {
                     token: user.refreshToken,
                 }),
             )
-            navigate('/')
+            navigate(ROUTE_PATHS.ROOT)
             /*eslint-disable @typescript-eslint/no-explicit-any */
         } catch (error: any) {
             if (error.code === 'auth/email-already-in-use') {
@@ -58,5 +59,3 @@ const UseSignUp = () => {
 
     return handleRegister
 }
-
-export default UseSignUp

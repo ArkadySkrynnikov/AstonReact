@@ -11,17 +11,17 @@ import {
 import { Link } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { IForm, Props } from '../Form.tsx'
+import * as ROUTE_PATHS from '../../../../app/providers/router/routePaths/pathConstants.ts'
 import { useAppSelector } from '../../../hooks/redux-hooks.ts'
+import { getUserIsNotDefined } from '../../../reducers/Auth/selectors/selectors.tsx'
 
-const FormLogin = ({ title, onSubmit }: Props) => {
-    const { userIsNotDefined } = useAppSelector((state) => state.userStore)
-
+export const FormLogin = ({ title, onSubmit }: Props) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<IForm>()
-
+    const userIsNotDefined = useAppSelector(getUserIsNotDefined)
     const submitHandler: SubmitHandler<IForm> = async (formData) => {
         onSubmit(formData)
     }
@@ -59,8 +59,9 @@ const FormLogin = ({ title, onSubmit }: Props) => {
                 </AuthorizationField>
                 <Button type='submit'>SUBMIT</Button>
             </AuthorizationForm>
-            <Link to='/register'>Dont have account? Lets register!</Link>
+            <Link to={ROUTE_PATHS.REGISTER}>
+                Dont have account? Lets register!
+            </Link>
         </LoginWrapper>
     )
 }
-export default FormLogin

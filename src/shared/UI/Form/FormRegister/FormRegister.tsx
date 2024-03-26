@@ -11,18 +11,21 @@ import {
 import { Link } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { IForm, Props } from '../Form.tsx'
+import * as ROUTE_PATHS from '../../../../app/providers/router/routePaths/pathConstants.ts'
 import { useAppSelector } from '../../../hooks/redux-hooks.ts'
+import {
+    getEmailError,
+    getPasswordError,
+} from '../../../reducers/Auth/selectors/selectors.tsx'
 
-const FormRegister = ({ title, onSubmit }: Props) => {
-    const { emailError, passwordError } = useAppSelector(
-        (state) => state.userStore,
-    )
-
+export const FormRegister = ({ title, onSubmit }: Props) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<IForm>()
+    const emailError = useAppSelector(getEmailError)
+    const passwordError = useAppSelector(getPasswordError)
 
     const submitHandler: SubmitHandler<IForm> = async (formData) => {
         onSubmit(formData)
@@ -80,11 +83,12 @@ const FormRegister = ({ title, onSubmit }: Props) => {
                     )}
                     <Label htmlFor='password'>Confirm password</Label>
                 </AuthorizationField>
-                {passwordError && <ErrorField>{passwordError}</ErrorField>}{' '}
+                {passwordError && <ErrorField>{passwordError}</ErrorField>}
                 <Button type='submit'>SUBMIT</Button>
             </AuthorizationForm>
-            <Link to='/login'>Already have an account? Sign in!</Link>
+            <Link to={ROUTE_PATHS.LOGIN}>
+                Already have an account? Sign in!
+            </Link>
         </LoginWrapper>
     )
 }
-export default FormRegister

@@ -1,11 +1,5 @@
-import Form from '../../shared/UI/Form/Form.tsx'
+import { Form } from '../../shared/UI/Form/Form.tsx'
 
-const RegisterPage = () => {
-    return (
-        <>
-            <Form />;
-        </>
-    )
+export const RegisterPage = () => {
+    return <Form />
 }
-
-export default RegisterPage

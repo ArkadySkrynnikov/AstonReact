@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { FunctionComponent, ReactElement, useEffect } from 'react'
+import { FunctionComponent, ReactNode, useEffect } from 'react'
+import * as ROUTE_PATHS from '../../app/providers/router/routePaths/pathConstants.ts'
 
-interface IPrivateRoutesProps {
-    component: ReactElement
+type IPrivateRoutesProps = {
+    component: ReactNode
 }
 
 export const PrivateRoute: FunctionComponent<IPrivateRoutesProps> = ({
@@ -12,7 +13,7 @@ export const PrivateRoute: FunctionComponent<IPrivateRoutesProps> = ({
     const isAuthenticated = localStorage.getItem('isAuthenticated')
     useEffect(() => {
         if (!isAuthenticated) {
-            navigate('/login')
+            navigate(ROUTE_PATHS.LOGIN)
         }
     }, [isAuthenticated, navigate])
 

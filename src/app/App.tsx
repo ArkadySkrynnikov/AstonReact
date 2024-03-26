@@ -3,15 +3,16 @@ import { Provider } from 'react-redux'
 import { store } from './providers/store/store.tsx'
 import { router } from './providers/router/router.tsx'
 import { AppLayout } from './layout/AppLayout.tsx'
+import { Suspense } from 'react'
 
-function App() {
+export const App = () => {
     return (
         <Provider store={store}>
             <AppLayout>
-                <RouterProvider router={router} />
+                <Suspense fallback={<h1>Loading page...</h1>}>
+                    <RouterProvider router={router} />
+                </Suspense>
             </AppLayout>
         </Provider>
     )
 }
-
-export default App

@@ -7,8 +7,9 @@ import {
 import { useAppDispatch } from './redux-hooks.ts'
 import { useNavigate } from 'react-router-dom'
 import { SubmitHandler } from 'react-hook-form'
+import * as ROUTE_PATHS from '../../app/providers/router/routePaths/pathConstants.ts'
 
-const useSignIn = () => {
+export const useSignIn = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const handleLogin: SubmitHandler<IForm> = async (data) => {
@@ -31,7 +32,7 @@ const useSignIn = () => {
                     token: user.refreshToken,
                 }),
             )
-            navigate('/')
+            navigate(ROUTE_PATHS.ROOT)
             /*eslint-disable @typescript-eslint/no-explicit-any */
         } catch (error: any) {
             if (error.code === 'auth/invalid-credential') {
@@ -43,5 +44,3 @@ const useSignIn = () => {
     }
     return handleLogin
 }
-
-export default useSignIn

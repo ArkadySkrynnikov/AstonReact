@@ -1,4 +1,3 @@
-const SearchPage = () => {
+export const SearchPage = () => {
     return <>Search Page</>
 }
-export default SearchPage

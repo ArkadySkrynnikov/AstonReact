@@ -1,5 +1,3 @@
-const HistoryPage = () => {
+export const HistoryPage = () => {
     return <>History Page</>
 }
-
-export default HistoryPage
