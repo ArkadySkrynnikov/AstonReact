@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { FunctionComponent, ReactNode, useEffect } from 'react'
-import * as ROUTE_PATHS from '../../app/providers/router/routePaths/pathConstants.ts'
+import * as ROUTE_PATHS from '../../../app/providers/router/routePaths/pathConstants.ts'
 
 type IPrivateRoutesProps = {
     component: ReactNode

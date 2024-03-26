@@ -1,13 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { PrivateRoute } from '../../../pages/PrivateRoute/PrivateRoute.tsx'
-import { FavoritePage } from '../../../pages/FavoritePage/FavoritePage.tsx'
-import { HistoryPage } from '../../../pages/HistoryPage/HistoryPage.tsx'
-import { SearchPage } from '../../../pages/SearchPage/SearchPage.tsx'
-import { LoginPage } from '../../../pages/LoginPage/LoginPage.tsx'
-import { RegisterPage } from '../../../pages/RegisterPage/RegisterPage.tsx'
-import { NotFoundPage } from '../../../pages/NotFoundPage/NotFoundPage.tsx'
-import { MainPage } from '../../../pages/MainPage/MainPage.tsx'
+import { PrivateRoute } from '../../../pages/PrivateRoute/ui/PrivateRoute.tsx'
 import * as ROUTE_PATHS from './routePaths/pathConstants.ts'
+import { lazy } from 'react'
+
+const MainPage = lazy(() => import('../../../pages/MainPage/index.ts'))
+const FavoritePage = lazy(() => import('../../../pages/FavoritePage/index.ts'))
+const HistoryPage = lazy(() => import('../../../pages/HistoryPage/index.ts'))
+const SearchPage = lazy(() => import('../../../pages/SearchPage/index.ts'))
+const LoginPage = lazy(() => import('../../../pages/LoginPage/index.ts'))
+const RegisterPage = lazy(() => import('../../../pages/RegisterPage/index.ts'))
+const NotFoundPage = lazy(() => import('../../../pages/NotFoundPage/index.ts'))
 
 export const router = createBrowserRouter([
     {

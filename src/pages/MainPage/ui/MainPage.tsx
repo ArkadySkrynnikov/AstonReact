@@ -1,13 +1,13 @@
 import {
     useAppDispatch,
     useAppSelector,
-} from '../../shared/hooks/redux-hooks.ts'
-import { removeUser } from '../../shared/reducers/Auth/slices/userSlice.tsx'
+} from '../../../shared/hooks/redux-hooks.ts'
+import { removeUser } from '../../../shared/reducers/Auth/slices/userSlice.tsx'
 import { Link } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
-import { auth } from '../../firebase.ts'
-import * as ROUTE_PATHS from '../../app/providers/router/routePaths/pathConstants.ts'
-import { getUser } from '../../shared/reducers/Auth/selectors/selectors.tsx'
+import { auth } from '../../../firebase.ts'
+import * as ROUTE_PATHS from '../../../app/providers/router/routePaths/pathConstants.ts'
+import { getUser } from '../../../shared/reducers/Auth/selectors/selectors.tsx'
 
 export const MainPage = () => {
     const dispatch = useAppDispatch()
