@@ -26,16 +26,13 @@ const StyledLink = styled(RouterLink)`
     }
 `
 
-interface ILinkProps {
+type LinkProps = {
     to: string
     children: ReactElement | string
 }
 
-const Link: FunctionComponent<ILinkProps> = ({
-    to,
-    children,
-}): ReactElement => {
+const Link: FunctionComponent<LinkProps> = ({ to, children }): ReactElement => {
     return <StyledLink to={to}>{children}</StyledLink>
 }
 
-export default Link
+export { Link }

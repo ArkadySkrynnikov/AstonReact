@@ -24,7 +24,7 @@ const StyledInput = styled.input`
     }
 `
 
-interface IInputProps {
+type InputProps = {
     type?: HTMLInputTypeAttribute
     onSubmit?: FormEventHandler<HTMLInputElement>
     onChange?: ChangeEventHandler<HTMLInputElement>
@@ -35,7 +35,7 @@ interface IInputProps {
     placeholder?: string
 }
 
-const Input: FunctionComponent<IInputProps> = ({
+const Input: FunctionComponent<InputProps> = ({
     type,
     onSubmit,
     onChange,
@@ -59,4 +59,4 @@ const Input: FunctionComponent<IInputProps> = ({
     )
 }
 
-export default Input
+export default { Input }

@@ -38,7 +38,7 @@ const StyledButton = styled.button<{
     }
 `
 
-interface IButtonProps {
+type ButtonProps = {
     type?: 'button' | 'submit' | 'reset'
     children: string
     onClick?: MouseEventHandler<HTMLButtonElement>
@@ -46,7 +46,7 @@ interface IButtonProps {
     variant: 'primary' | 'secondary'
 }
 
-const Button: FunctionComponent<IButtonProps> = ({
+const Button: FunctionComponent<ButtonProps> = ({
     type,
     children,
     onClick,
@@ -65,4 +65,4 @@ const Button: FunctionComponent<IButtonProps> = ({
     )
 }
 
-export default Button
+export { Button }

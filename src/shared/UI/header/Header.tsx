@@ -1,4 +1,4 @@
-import Link from '../link/Link.tsx'
+import { Link } from '../link/Link.tsx'
 import styled from 'styled-components'
 import { baseTheme } from '../../../app/styles/theme.ts'
 
@@ -38,4 +38,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export { Header }
