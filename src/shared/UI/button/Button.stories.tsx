@@ -1,4 +1,4 @@
-import Button from '../button/Button.tsx'
+import { Button } from '../button/Button.tsx'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Button> = {

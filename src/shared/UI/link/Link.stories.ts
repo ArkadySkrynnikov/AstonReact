@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Link from './Link.tsx'
+import { Link } from './Link.tsx'
 import {
     reactRouterParameters,
     withRouter,
