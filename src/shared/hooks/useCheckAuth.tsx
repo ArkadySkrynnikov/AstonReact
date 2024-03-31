@@ -1,5 +1,5 @@
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface IFirebaseUser {
     email: string
@@ -7,19 +7,23 @@ interface IFirebaseUser {
     uid: string
     refreshToken: string
 }
-
 export const useCheckAuth = () => {
     const auth = getAuth()
     const [user, setUser] = useState<IFirebaseUser | null>(null)
-    onAuthStateChanged(auth, (res: User | null) => {
-        if (res) {
-            setUser({
-                email: res.email ?? '',
-                displayName: res.displayName ?? '',
-                uid: res.uid,
-                refreshToken: res.refreshToken,
-            })
-        }
-    })
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (res: User | null) => {
+            if (res) {
+                setUser({
+                    email: res.email ?? '',
+                    displayName: res.displayName ?? '',
+                    uid: res.uid,
+                    refreshToken: res.refreshToken,
+                })
+            }
+        })
+        return () => unsubscribe()
+    }, [auth])
+
     return user
 }

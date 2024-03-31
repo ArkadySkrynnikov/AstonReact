@@ -1,8 +1,10 @@
 import {
     ChangeEventHandler,
+    FocusEventHandler,
     FormEventHandler,
     FunctionComponent,
     HTMLInputTypeAttribute,
+    KeyboardEventHandler,
     LegacyRef,
     MouseEventHandler,
     ReactElement,
@@ -33,9 +35,13 @@ type InputProps = {
     value?: string | number | readonly string[] | undefined
     defaultValue?: string | number | readonly string[] | undefined
     placeholder?: string
+    onKeyDown?: KeyboardEventHandler<HTMLInputElement>
+    onBlur?: FocusEventHandler<HTMLInputElement>
+    onFocus?: FocusEventHandler<HTMLInputElement>
+    name?: string
 }
 
-const Input: FunctionComponent<InputProps> = ({
+export const Input: FunctionComponent<InputProps> = ({
     type,
     onSubmit,
     onChange,
@@ -44,6 +50,10 @@ const Input: FunctionComponent<InputProps> = ({
     defaultValue,
     onClick,
     placeholder,
+    onKeyDown,
+    onBlur,
+    onFocus,
+    name,
 }): ReactElement => {
     return (
         <StyledInput
@@ -55,8 +65,10 @@ const Input: FunctionComponent<InputProps> = ({
             onSubmit={onSubmit}
             onChange={onChange}
             onClick={onClick}
+            onKeyDown={onKeyDown}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            name={name}
         />
     )
 }
-
-export default { Input }
