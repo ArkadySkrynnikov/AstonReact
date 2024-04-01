@@ -6,7 +6,7 @@ import {
     useAppSelector,
 } from '../../../shared/hooks/redux-hooks.ts'
 import { getCollectionsData } from '../../../shared/reducers/Search/selectors/selectors.ts'
-import { fetchFilmsCollections } from '../../../shared/reducers/Search/slices/searchCollections.ts'
+import { fetchFilmsCollections } from '../../../shared/reducers/Search/slices/search.ts'
 import { apiQueryCollections } from '../../../shared/consts/apiQueryStrings.ts'
 
 const FilmList = lazy(() => import('../../../shared/UI/FilmList/FilmList.tsx'))

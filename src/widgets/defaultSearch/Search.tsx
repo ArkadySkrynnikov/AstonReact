@@ -24,7 +24,7 @@ import useDebouncedValue from '../../shared/hooks/useDebouncedValue.tsx'
 import { getSuggestions } from '../../shared/reducers/Search/selectors/selectors.ts'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { apiQueryFilters } from '../../shared/consts/apiQueryStrings.ts'
-import { fetchFilmsSuggestions } from '../../shared/reducers/Search/slices/suggestionsMenuSlice.ts'
+import { fetchFilmsSuggestions } from '../../shared/reducers/Search/slices/search.ts'
 import { SEARCH } from '../../app/providers/router/routePaths/pathConstants.ts'
 import { Select } from '../../shared/UI/Select/Select.tsx'
 import {

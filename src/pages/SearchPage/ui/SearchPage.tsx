@@ -7,7 +7,7 @@ import {
 import { useEffect } from 'react'
 import { getFilmsData } from '../../../shared/reducers/Search/selectors/selectors.ts'
 import FilmList from '../../../shared/UI/FilmList/FilmList.tsx'
-import { fetchFilmsWithFilters } from '../../../shared/reducers/Search/slices/searchWithFilterSlice.ts'
+import { fetchFilmsList } from '../../../shared/reducers/Search/slices/search.ts'
 import styled from 'styled-components'
 
 export const SearchPage = () => {
@@ -16,7 +16,7 @@ export const SearchPage = () => {
     const { data } = useAppSelector(getFilmsData)
 
     useEffect(() => {
-        dispatch(fetchFilmsWithFilters(location.search))
+        dispatch(fetchFilmsList(location.search))
     }, [dispatch, location.search])
 
     return (
