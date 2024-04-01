@@ -100,7 +100,7 @@ const StyledLink = styled(RouterLink)<{
 
 type LinkProps = {
     to: string
-    children: ReactElement | string
+    children: ReactElement | string | ReactElement[]
     type: 'logo' | 'route' | 'suggestItem'
 }
 

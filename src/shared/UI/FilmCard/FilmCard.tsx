@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { filmItem } from '../../types/apiData.ts'
+import { FilmItem } from '../../types/apiData.ts'
 import styled from 'styled-components'
 import { baseTheme } from '../../../app/styles/theme.ts'
 import fallbackImage from '../../../assets/images/default-fallback.png'
@@ -34,7 +34,7 @@ const FilmName = styled.span`
     text-overflow: ellipsis;
 `
 
-export const FilmCard: FunctionComponent<filmItem> = (film) => {
+export const FilmCard: FunctionComponent<FilmItem> = (film) => {
     return (
         <Container>
             <FilmContainer>

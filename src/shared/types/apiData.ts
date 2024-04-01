@@ -1,16 +1,16 @@
-export type filmsInitialState = {
+export type FilmsInitialState = {
     isLoading: boolean
     data: Awaited<Promise<ApiData>>
     error: boolean
 }
 
 export type ApiData = {
-    items: filmItem[]
+    items: FilmItem[]
     total: number
     totalPages: number
 }
 
-export type filmItem = {
+export type FilmItem = {
     countries: Countries[]
     genres: Genres[]
     imdbId: string
@@ -34,13 +34,13 @@ export type Genres = {
     genre: string
 }
 
-export type filmByIdInitialState = {
+export type FilmByIdInitialState = {
     isLoading: boolean
-    data: Awaited<Promise<filmInfo>>
+    data: Awaited<Promise<FilmInfo>>
     error: boolean
 }
 
-export type filmInfo = {
+export type FilmInfo = {
     kinopoiskId: number
     kinopoiskHDId: string
     imdbId: string

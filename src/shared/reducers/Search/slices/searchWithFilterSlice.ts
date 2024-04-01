@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ApiData, filmsInitialState } from '../../../types/apiData.ts'
+import { ApiData, FilmsInitialState } from '../../../types/apiData.ts'
 import { fetchFilms } from '../../../api/fetchFilms.ts'
 
 export const fetchFilmsWithFilters = createAsyncThunk(
@@ -13,7 +13,7 @@ export const fetchFilmsWithFilters = createAsyncThunk(
     },
 )
 
-const initialState: filmsInitialState = {
+const initialState: FilmsInitialState = {
     isLoading: false,
     data: {
         items: [],

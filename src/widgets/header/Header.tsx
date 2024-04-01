@@ -76,10 +76,8 @@ const Header: FunctionComponent<HeaderProps> = ({
             <Container>
                 <LogoContainer>
                     <Link type={'logo'} to={'/'}>
-                        <>
-                            <Image src={logo} />
-                            <Span>Search Films</Span>
-                        </>
+                        <Image src={logo} />
+                        <Span>Search Films</Span>
                     </Link>
                 </LogoContainer>
 

@@ -2,6 +2,7 @@ import {
     ChangeEventHandler,
     FormEventHandler,
     FunctionComponent,
+    KeyboardEventHandler,
     ReactElement,
     useEffect,
     useState,
@@ -24,6 +25,13 @@ import { getSuggestions } from '../../shared/reducers/Search/selectors/selectors
 import { useLocation, useNavigate } from 'react-router-dom'
 import { apiQueryFilters } from '../../shared/consts/apiQueryStrings.ts'
 import { fetchFilmsSuggestions } from '../../shared/reducers/Search/slices/suggestionsMenuSlice.ts'
+import { SEARCH } from '../../app/providers/router/routePaths/pathConstants.ts'
+import { Select } from '../../shared/UI/Select/Select.tsx'
+import {
+    orderTypes,
+    ratingValues,
+    videoTypes,
+} from '../../shared/consts/filterValues.ts'
 
 export const Search: FunctionComponent = (): ReactElement => {
     const { data } = useAppSelector(getSuggestions)
@@ -68,18 +76,30 @@ export const Search: FunctionComponent = (): ReactElement => {
         })
     }
 
+    const formOnKeyDownHandler: KeyboardEventHandler<HTMLFormElement> = (
+        event,
+    ) => {
+        if (event.key === 'Enter') event.preventDefault()
+    }
+
+    const inputKeyDownHandler: KeyboardEventHandler<HTMLInputElement> = (
+        event,
+    ) => {
+        if (event.key === 'Enter') event.preventDefault()
+    }
+
     const submitHandler: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault()
 
         const queryString = new URLSearchParams(filters).toString()
-        navigate(`/search?${queryString}`)
+        navigate(`${SEARCH}?${queryString}`)
     }
 
     // Саджесты
     useEffect(() => {
         if (debouncedTerm) {
             const queryString = new URLSearchParams(filters).toString()
-            dispatch(fetchFilmsSuggestions('?' + queryString))
+            dispatch(fetchFilmsSuggestions(queryString))
         }
     }, [dispatch, debouncedTerm, filters])
 
@@ -94,84 +114,79 @@ export const Search: FunctionComponent = (): ReactElement => {
     }, [location.search])
 
     return (
-        <>
-            <MenuContainer>
-                <HighlightedContainer>
-                    <SearchForm
-                        tabIndex={0}
-                        autoComplete={'off'}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter') e.preventDefault()
-                        }}
-                        onSubmit={submitHandler}
-                    >
-                        <div>
-                            <label>
-                                Сортировать:
-                                <select
-                                    name='selectSort'
-                                    value={filters.order}
-                                    onChange={selectedSortChangeHandler}
-                                >
-                                    <option value='RATING'>По рейтингу</option>
-                                    <option value='YEAR'>По году</option>
-                                </select>
-                            </label>
-                            <label>
-                                Тип:
-                                <select
-                                    name='selectType'
-                                    value={filters.type}
-                                    onChange={selectedTypeChangeHandler}
-                                >
-                                    <option value='FILM'>Фильм</option>
-                                    <option value='TV_SHOW'>
-                                        Телевизионное шоу
-                                    </option>
-                                    <option value='MINI_SERIES'>
-                                        Мини сериал
-                                    </option>
-                                    <option value='ALL'>Все вместе</option>
-                                </select>
-                            </label>
-                            <label>
-                                Минимальный рейтинг:
-                                <select
-                                    name='selectMinRating'
-                                    value={filters.ratingFrom}
-                                    onChange={selectedMinRatingChangeHandler}
-                                >
-                                    <option value='1'>1</option>
-                                    <option value='2'>2</option>
-                                    <option value='3'>3</option>
-                                    <option value='4'>4</option>
-                                    <option value='5'>5</option>
-                                    <option value='6'>6</option>
-                                    <option value='7'>7</option>
-                                    <option value='8'>8</option>
-                                    <option value='9'>9</option>
-                                    <option value='10'>10</option>
-                                </select>
-                            </label>
-                        </div>
-                        <SearchFormControls>
-                            <Input
-                                onChange={onChangeHandler}
-                                placeholder={'Найти фильм'}
-                                value={filters.keyword}
-                                name={'search'}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter') e.preventDefault()
-                                }}
-                            />
-                            <Button variant={'primary'} type={'submit'}>
-                                Найти
-                            </Button>
-                        </SearchFormControls>
-                    </SearchForm>
-                    {debouncedTerm && <SuggestMenu items={data.items} />}
-                </HighlightedContainer>
-            </MenuContainer>
-        </>
+        <MenuContainer>
+            <HighlightedContainer>
+                <SearchForm
+                    tabIndex={0}
+                    autoComplete={'off'}
+                    onKeyDown={formOnKeyDownHandler}
+                    onSubmit={submitHandler}
+                >
+                    <div>
+                        <label>
+                            Сортировать:
+                            <Select
+                                name='selectSort'
+                                value={filters.order}
+                                onChange={selectedSortChangeHandler}
+                            >
+                                {orderTypes.map((e, i) => {
+                                    return (
+                                        <option key={i} value={e.type}>
+                                            {e.title}
+                                        </option>
+                                    )
+                                })}
+                            </Select>
+                        </label>
+                        <label>
+                            Тип:
+                            <Select
+                                name='selectType'
+                                value={filters.type}
+                                onChange={selectedTypeChangeHandler}
+                            >
+                                {videoTypes.map((e, i) => {
+                                    return (
+                                        <option key={i} value={e.type}>
+                                            {e.title}
+                                        </option>
+                                    )
+                                })}
+                            </Select>
+                        </label>
+                        <label>
+                            Минимальный рейтинг:
+                            <Select
+                                name='selectMinRating'
+                                value={filters.ratingFrom}
+                                onChange={selectedMinRatingChangeHandler}
+                            >
+                                {ratingValues.map((e, i) => {
+                                    return (
+                                        <option key={i} value={e}>
+                                            {e}
+                                        </option>
+                                    )
+                                })}
+                            </Select>
+                        </label>
+                    </div>
+                    <SearchFormControls>
+                        <Input
+                            onChange={onChangeHandler}
+                            placeholder={'Найти фильм'}
+                            value={filters.keyword}
+                            name={'search'}
+                            onKeyDown={inputKeyDownHandler}
+                        />
+                        <Button variant={'primary'} type={'submit'}>
+                            Найти
+                        </Button>
+                    </SearchFormControls>
+                </SearchForm>
+                {debouncedTerm && <SuggestMenu items={data.items} />}
+            </HighlightedContainer>
+        </MenuContainer>
     )
 }

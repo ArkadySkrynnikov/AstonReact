@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { filmByIdInitialState, filmInfo } from '../../../types/apiData.ts'
+import { FilmByIdInitialState, FilmInfo } from '../../../types/apiData.ts'
 import { fetchFilms } from '../../../api/fetchFilms.ts'
 
 export const fetchFilmById = createAsyncThunk(
@@ -9,7 +9,7 @@ export const fetchFilmById = createAsyncThunk(
     },
 )
 
-const initialState: filmByIdInitialState = {
+const initialState: FilmByIdInitialState = {
     isLoading: false,
     data: {
         kinopoiskId: 0,
@@ -72,7 +72,7 @@ const searchFilmByIdSlice = createSlice({
         })
         builder.addCase(
             fetchFilmById.fulfilled,
-            (state, action: PayloadAction<filmInfo>) => {
+            (state, action: PayloadAction<FilmInfo>) => {
                 state.isLoading = false
                 state.data = action.payload
             },
