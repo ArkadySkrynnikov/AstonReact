@@ -6,7 +6,7 @@ export default createGlobalStyle`
         font-family: 'GeistMono';
         src: url(${GeistMono}) format('woff2');
     }
-    
+
     /* Box sizing rules */
     *,
     *::before,

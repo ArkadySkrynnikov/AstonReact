@@ -1,11 +1,10 @@
-import { FunctionComponent, useEffect } from 'react'
+import { FunctionComponent, ReactElement, useEffect } from 'react'
 import { useCheckAuth } from '../../shared/hooks/useCheckAuth.tsx'
 import { useAppDispatch } from '../../shared/hooks/redux-hooks.ts'
 import { setUser } from '../../shared/reducers/Auth/slices/userSlice.tsx'
 
 type Props = {
-    // eslint-disable-next-line no-undef
-    children: JSX.Element
+    children: ReactElement
 }
 export const AppLayout: FunctionComponent<Props> = ({ children }) => {
     const signedUser = useCheckAuth()

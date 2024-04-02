@@ -1,4 +1,9 @@
 export const baseTheme = {
+    container: {
+        desktop: '1400px',
+        mobile: '',
+        tablet: '',
+    },
     padding: {
         button: '8px 12px',
         link: '8px 12px',
@@ -31,6 +36,17 @@ export const baseTheme = {
     borderRadius: {
         button: '8px',
         link: '8px',
-        input: '10px',
+        input: '8px',
+    },
+    border: {
+        link: {
+            logo: 'none',
+            route: '1px #e4e4e7 solid',
+            suggestItem: '1px #e4e4e7 solid',
+            hover: {
+                logo: 'none',
+                route: '1px #000000 solid',
+            },
+        },
     },
 }

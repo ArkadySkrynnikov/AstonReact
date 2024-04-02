@@ -1,36 +1,48 @@
+import { Search } from '../../../widgets/defaultSearch/Search.tsx'
+import styled from 'styled-components'
+import { lazy, useEffect } from 'react'
 import {
     useAppDispatch,
     useAppSelector,
 } from '../../../shared/hooks/redux-hooks.ts'
-import { removeUser } from '../../../shared/reducers/Auth/slices/userSlice.tsx'
-import { Link } from 'react-router-dom'
-import { signOut } from 'firebase/auth'
-import { auth } from '../../../firebase.ts'
-import * as ROUTE_PATHS from '../../../app/providers/router/routePaths/pathConstants.ts'
-import { getUser } from '../../../shared/reducers/Auth/selectors/selectors.tsx'
+import { getCollectionsData } from '../../../shared/reducers/Search/selectors/selectors.ts'
+import { fetchFilmsCollections } from '../../../shared/reducers/Search/slices/search.ts'
+import { apiQueryCollections } from '../../../shared/consts/apiQueryStrings.ts'
+
+const FilmList = lazy(() => import('../../../shared/UI/FilmList/FilmList.tsx'))
 
 export const MainPage = () => {
     const dispatch = useAppDispatch()
-    const user = useAppSelector(getUser)
-    const handleSignOut = () => {
-        signOut(auth).then(function () {
-            dispatch(removeUser())
-        })
-    }
+    const { data } = useAppSelector(getCollectionsData)
 
-    return user?.isAuth ? (
-        <div>
-            <h1>Home page for authorized users!</h1>
-            <h1>Hello {user.username}</h1>
-            <Link to={ROUTE_PATHS.HISTORY}>Go to history</Link>
-            <Link to={ROUTE_PATHS.FAVORITES}>Go to favorites</Link>
-            <button onClick={handleSignOut}>Log out</button>
-        </div>
-    ) : (
+    useEffect(() => {
+        dispatch(
+            fetchFilmsCollections(
+                new URLSearchParams(apiQueryCollections).toString(),
+            ),
+        )
+    }, [dispatch])
+
+    return (
         <>
-            <h1>Home page for unauthorized users!</h1>
-            <Link to={ROUTE_PATHS.LOGIN}>SignIn</Link>
-            <Link to={ROUTE_PATHS.REGISTER}>SignUp</Link>
+            <Search />
+            <Container>
+                <FilmsContainer>
+                    <FilmList items={data.items} />
+                </FilmsContainer>
+            </Container>
         </>
     )
 }
+
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+`
+
+const FilmsContainer = styled.div`
+    width: 1400px;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 40px;
+`

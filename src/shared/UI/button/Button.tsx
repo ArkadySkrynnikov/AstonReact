@@ -22,7 +22,6 @@ const StyledButton = styled.button<{
     border-radius: ${baseTheme.borderRadius.button};
     border: 1px #f4f4f5 solid;
     cursor: pointer;
-
     transition: 0.2s;
 
     &:hover {
@@ -46,7 +45,7 @@ type ButtonProps = {
     variant: 'primary' | 'secondary'
 }
 
-const Button: FunctionComponent<ButtonProps> = ({
+export const Button: FunctionComponent<ButtonProps> = ({
     type,
     children,
     onClick,
@@ -64,5 +63,3 @@ const Button: FunctionComponent<ButtonProps> = ({
         </StyledButton>
     )
 }
-
-export { Button }
