@@ -1,5 +1,5 @@
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface IFirebaseUser {
     email: string
@@ -7,6 +7,7 @@ interface IFirebaseUser {
     uid: string
     refreshToken: string
 }
+
 export const useCheckAuth = () => {
     const auth = getAuth()
     const [user, setUser] = useState<IFirebaseUser | null>(null)
