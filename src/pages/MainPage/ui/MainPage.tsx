@@ -1,5 +1,4 @@
 import { Search } from '../../../widgets/defaultSearch/Search.tsx'
-import styled from 'styled-components'
 import { lazy, useEffect } from 'react'
 import {
     useAppDispatch,
@@ -8,6 +7,7 @@ import {
 import { getCollectionsData } from '../../../shared/reducers/Search/selectors/selectors.ts'
 import { fetchFilmsCollections } from '../../../shared/reducers/Search/slices/search.ts'
 import { apiQueryCollections } from '../../../shared/consts/apiQueryStrings.ts'
+import { Container, FilmsContainer } from './main.styled.ts'
 
 const FilmList = lazy(() => import('../../../shared/UI/FilmList/FilmList.tsx'))
 
@@ -34,15 +34,3 @@ export const MainPage = () => {
         </>
     )
 }
-
-const Container = styled.div`
-    display: flex;
-    justify-content: center;
-`
-
-const FilmsContainer = styled.div`
-    width: 1400px;
-    display: flex;
-    flex-flow: row wrap;
-    gap: 40px;
-`

@@ -1,14 +1,14 @@
 import {
     AuthorizationField,
     AuthorizationForm,
-    Button,
     ErrorField,
     Input,
     Label,
     LoginWrapper,
     Title,
 } from '../form.styled.ts'
-import { Link } from 'react-router-dom'
+import { Link } from '../../Link/Link.tsx'
+import { Button } from '../../button/Button.tsx'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { IForm, Props } from '../Form.tsx'
 import * as ROUTE_PATHS from '../../../../app/providers/router/routePaths/pathConstants.ts'
@@ -57,9 +57,9 @@ export const FormLogin = ({ title, onSubmit }: Props) => {
                         <ErrorField>User invalid credential</ErrorField>
                     )}
                 </AuthorizationField>
-                <Button type='submit'>SUBMIT</Button>
+                <Button variant='primary'>SUBMIT</Button>
             </AuthorizationForm>
-            <Link to={ROUTE_PATHS.REGISTER}>
+            <Link type='route' to={ROUTE_PATHS.REGISTER}>
                 Dont have account? Lets register!
             </Link>
         </LoginWrapper>

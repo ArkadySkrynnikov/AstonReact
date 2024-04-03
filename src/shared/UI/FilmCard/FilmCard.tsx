@@ -1,58 +1,101 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, memo, useEffect, useState } from 'react'
 import { FilmItem } from '../../types/apiData.ts'
-import styled from 'styled-components'
-import { baseTheme } from '../../../app/styles/theme.ts'
 import fallbackImage from '../../../assets/images/default-fallback.png'
 import { Link } from '../Link/Link.tsx'
-import { Button } from '../button/Button.tsx'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks.ts'
+import { getUser } from '../../reducers/Auth/selectors/selectors.tsx'
+import {
+    addMovieToFavoriteDB,
+    removeMovieFromFavorites,
+} from '../../reducers/Favorite/actions/FavoriteActions.tsx'
+import { RenderButtons } from '../RenderButton/RenderButtons.tsx'
+import {
+    Container,
+    FilmContainer,
+    FilmName,
+    Poster,
+} from './filmCard.styled.ts'
 
-const Container = styled.div`
-    ${baseTheme.font.GeistMono}
-    width: 300px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
-`
+type FilmCardProps = {
+    film: FilmItem
+    isFavoritePage: boolean
+}
 
-const FilmContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 4px 8px;
-    gap: 5px;
-`
+export const FilmCard: FunctionComponent<FilmCardProps> = memo((props) => {
+    const { film, isFavoritePage } = props
+    const [toggle, setToggle] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(getUser)
 
-const Poster = styled.img`
-    max-height: 150px;
-    border-radius: 8px;
-`
+    useEffect(() => {
+        const favoritesFromStorage = JSON.parse(
+            localStorage.getItem(`favoriteMovies_${user.id}`) || '[]',
+        )
+        if (favoritesFromStorage.includes(film.kinopoiskId)) {
+            setToggle(true)
+        }
+    }, [film.kinopoiskId, user.id])
 
-const FilmName = styled.span`
-    width: 284px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-`
+    const handleAddToFavorites = () => {
+        dispatch(addMovieToFavoriteDB(film))
+        setToggle(true)
+        const favoritesFromStorage = JSON.parse(
+            localStorage.getItem(`favoriteMovies_${user.id}`) || '[]',
+        )
+        const updatedFavorites = [...favoritesFromStorage, film.kinopoiskId]
+        localStorage.setItem(
+            `favoriteMovies_${user.id}`,
+            JSON.stringify(updatedFavorites),
+        )
+    }
 
-export const FilmCard: FunctionComponent<FilmItem> = (film) => {
+    const handleRemoveFromFavorites = () => {
+        dispatch(removeMovieFromFavorites(film?.kinopoiskId))
+        setToggle(false)
+
+        const favoritesFromStorage: number[] = JSON.parse(
+            localStorage.getItem(`favoriteMovies_${user.id}`) || '[]',
+        )
+
+        const updatedFavorites: number[] = favoritesFromStorage.filter(
+            (id: number) => id !== film.kinopoiskId,
+        )
+
+        localStorage.setItem(
+            `favoriteMovies_${user.id}`,
+            JSON.stringify(updatedFavorites),
+        )
+    }
+
     return (
         <Container>
             <FilmContainer>
                 {film.posterUrl ? (
-                    <Poster src={film.posterUrl} />
+                    <Poster src={film.posterUrl} loading='lazy' />
                 ) : (
-                    <Poster src={fallbackImage} />
+                    <Poster src={fallbackImage} loading='lazy' />
                 )}
-                <FilmName>{film.nameRu ? film.nameRu : film.nameEn}</FilmName>
+                <FilmName>{film.nameRu || film.nameEn}</FilmName>
                 <span>
-                    {'Рейтинг: ' + film.ratingKinopoisk || film.ratingImdb}
+                    {'Рейтинг: ' + (film.ratingKinopoisk || film.ratingImdb)}
                 </span>
                 <span>{'Год: ' + film.year}</span>
-                <Link to={`/filmPage/${film.kinopoiskId}`} type={'route'}>
-                    Подробнее
-                </Link>
-                <Button variant={'secondary'}>Добавить в избранное</Button>
+                {user.isAuth ? (
+                    <RenderButtons
+                        isFavoritePage={isFavoritePage}
+                        film={film}
+                        toggle={toggle}
+                        onAddToFavorites={handleAddToFavorites}
+                        onRemoveFromFavorites={handleRemoveFromFavorites}
+                    />
+                ) : (
+                    <Link to={`/filmPage/${film.kinopoiskId}`} type={'route'}>
+                        Подробнее
+                    </Link>
+                )}
             </FilmContainer>
         </Container>
     )
-}
+})
+
+FilmCard.displayName = 'FilmCard'

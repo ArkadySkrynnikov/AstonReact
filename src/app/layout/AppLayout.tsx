@@ -2,13 +2,14 @@ import { FunctionComponent, ReactElement, useEffect } from 'react'
 import { useCheckAuth } from '../../shared/hooks/useCheckAuth.tsx'
 import { useAppDispatch } from '../../shared/hooks/redux-hooks.ts'
 import { setUser } from '../../shared/reducers/Auth/slices/userSlice.tsx'
+import { getFavoriteFromFirebaseDB } from '../../shared/reducers/Favorite/actions/FavoriteActions.tsx'
 
 type Props = {
     children: ReactElement
 }
 export const AppLayout: FunctionComponent<Props> = ({ children }) => {
-    const signedUser = useCheckAuth()
     const dispatch = useAppDispatch()
+    const signedUser = useCheckAuth()
 
     useEffect(() => {
         if (signedUser) {
@@ -22,6 +23,7 @@ export const AppLayout: FunctionComponent<Props> = ({ children }) => {
                 }),
             )
             localStorage.setItem('isAuthenticated', 'true')
+            dispatch(getFavoriteFromFirebaseDB())
         }
     }, [signedUser, dispatch])
 

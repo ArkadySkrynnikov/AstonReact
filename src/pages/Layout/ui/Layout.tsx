@@ -11,7 +11,6 @@ import { auth } from '../../../firebase.ts'
 
 export const Layout = () => {
     const dispatch = useAppDispatch()
-
     const user = useAppSelector(getUser)
 
     const logOutFn = () => {

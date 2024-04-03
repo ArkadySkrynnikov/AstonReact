@@ -34,6 +34,10 @@ export const router = createBrowserRouter([
                 path: ROUTE_PATHS.SEARCH,
                 element: <SearchPage />,
             },
+            {
+                path: ROUTE_PATHS.FILM_PAGE,
+                element: <FilmPage />,
+            },
         ],
     },
     {
@@ -47,9 +51,5 @@ export const router = createBrowserRouter([
     {
         path: ROUTE_PATHS.NOT_FOUND,
         element: <NotFoundPage />,
-    },
-    {
-        path: ROUTE_PATHS.FILM_PAGE,
-        element: <FilmPage />,
     },
 ])

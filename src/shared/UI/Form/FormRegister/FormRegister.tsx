@@ -1,14 +1,12 @@
 import {
     AuthorizationField,
     AuthorizationForm,
-    Button,
     ErrorField,
     Input,
     Label,
     LoginWrapper,
     Title,
 } from '../form.styled.ts'
-import { Link } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { IForm, Props } from '../Form.tsx'
 import * as ROUTE_PATHS from '../../../../app/providers/router/routePaths/pathConstants.ts'
@@ -17,6 +15,8 @@ import {
     getEmailError,
     getPasswordError,
 } from '../../../reducers/Auth/selectors/selectors.tsx'
+import { Link } from '../../Link/Link.tsx'
+import { Button } from '../../button/Button.tsx'
 
 export const FormRegister = ({ title, onSubmit }: Props) => {
     const {
@@ -84,9 +84,9 @@ export const FormRegister = ({ title, onSubmit }: Props) => {
                     <Label htmlFor='password'>Confirm password</Label>
                 </AuthorizationField>
                 {passwordError && <ErrorField>{passwordError}</ErrorField>}
-                <Button type='submit'>SUBMIT</Button>
+                <Button variant='primary'>SUBMIT</Button>
             </AuthorizationForm>
-            <Link to={ROUTE_PATHS.LOGIN}>
+            <Link type='route' to={ROUTE_PATHS.LOGIN}>
                 Already have an account? Sign in!
             </Link>
         </LoginWrapper>
