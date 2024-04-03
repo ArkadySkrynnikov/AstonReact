@@ -92,7 +92,12 @@ export const Search: FunctionComponent = (): ReactElement => {
         event.preventDefault()
 
         const queryString = new URLSearchParams(filters).toString()
-        navigate(`${SEARCH}?${queryString}`)
+
+        if (location.pathname === '/') {
+            navigate(`${SEARCH}?${queryString}`)
+        } else {
+            navigate({ search: queryString })
+        }
     }
 
     // Саджесты

@@ -3,7 +3,7 @@ export const apiQueryFilters = {
     order: 'RATING',
 
     //сортировка по типу FILM TV_SHOW TV_SERIES MINI_SERIES ALL
-    type: 'FILM',
+    type: 'ALL',
 
     //минимальный рейтинг цифра 123456789 10
     ratingFrom: '1',
