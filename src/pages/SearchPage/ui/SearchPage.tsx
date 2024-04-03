@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import { Search } from '../../../widgets/defaultSearch/Search.tsx'
+import { Search } from '../../../widgets/search/Search.tsx'
 import {
     useAppDispatch,
     useAppSelector,

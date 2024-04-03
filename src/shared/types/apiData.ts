@@ -87,3 +87,14 @@ export type FilmInfo = {
     shortFilm: boolean
     completed: boolean
 }
+
+export type apiQueryFiltersType = {
+    order: string
+    type: string
+    ratingFrom: string
+    ratingTo: string
+    yearFrom: string
+    yearTo: string
+    keyword: string
+    page: string
+}

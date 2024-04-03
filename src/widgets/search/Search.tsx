@@ -32,13 +32,15 @@ import {
     ratingValues,
     videoTypes,
 } from '../../shared/consts/filterValues.ts'
+import { getUser } from '../../shared/reducers/Auth/selectors/selectors.tsx'
+import { saveSearchHistory } from '../../shared/reducers/History/slices/searchHistorySlice.ts'
 
 export const Search: FunctionComponent = (): ReactElement => {
     const { data } = useAppSelector(getSuggestions)
     const dispatch = useAppDispatch()
     const location = useLocation()
     const navigate = useNavigate()
-
+    const user = useAppSelector(getUser)
     const [filters, setFilters] = useState(apiQueryFilters)
 
     //ввод пользователя
@@ -92,6 +94,15 @@ export const Search: FunctionComponent = (): ReactElement => {
         event.preventDefault()
 
         const queryString = new URLSearchParams(filters).toString()
+
+        if (user.isAuth && user.username) {
+            dispatch(
+                saveSearchHistory({
+                    user: user.username,
+                    data: filters,
+                }),
+            )
+        }
 
         if (location.pathname === '/') {
             navigate(`${SEARCH}?${queryString}`)
