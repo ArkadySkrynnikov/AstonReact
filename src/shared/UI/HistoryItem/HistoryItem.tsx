@@ -1,5 +1,5 @@
 import { FunctionComponent, MouseEventHandler } from 'react'
-import { apiQueryFiltersType } from '../../types/apiData.ts'
+import { ApiQueryFiltersType } from '../../types/apiData.ts'
 import styled from 'styled-components'
 import { baseTheme } from '../../../app/styles/theme.ts'
 import { Link } from '../Link/Link.tsx'
@@ -9,7 +9,7 @@ import { useAppDispatch } from '../../hooks/redux-hooks.ts'
 import { deleteItemFromSearchHistory } from '../../reducers/History/slices/searchHistorySlice.ts'
 
 type HistoryItemProps = {
-    filters: apiQueryFiltersType
+    filters: ApiQueryFiltersType
     id: number
     username: string
 }
@@ -22,7 +22,7 @@ export const HistoryItem: FunctionComponent<HistoryItemProps> = ({
     const query = new URLSearchParams(filters)
     const dispatch = useAppDispatch()
 
-    const buttonClickHandler: MouseEventHandler<HTMLButtonElement> = () => {
+    const buttonOnClickHandler: MouseEventHandler<HTMLButtonElement> = () => {
         dispatch(deleteItemFromSearchHistory({ user: username, index: id }))
     }
 
@@ -35,7 +35,7 @@ export const HistoryItem: FunctionComponent<HistoryItemProps> = ({
             <Link to={`/${SEARCH}?${query}`} type={'route'}>
                 Перейти
             </Link>
-            <Button variant={'secondary'} onClick={buttonClickHandler}>
+            <Button variant={'secondary'} onClick={buttonOnClickHandler}>
                 Удалить
             </Button>
         </Container>

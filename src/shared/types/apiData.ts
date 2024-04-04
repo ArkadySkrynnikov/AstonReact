@@ -88,7 +88,7 @@ export type FilmInfo = {
     completed: boolean
 }
 
-export type apiQueryFiltersType = {
+export type ApiQueryFiltersType = {
     order: string
     type: string
     ratingFrom: string

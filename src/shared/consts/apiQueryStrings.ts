@@ -1,6 +1,6 @@
-import { apiQueryFiltersType } from '../types/apiData.ts'
+import { ApiQueryFiltersType } from '../types/apiData.ts'
 
-export const apiQueryFilters: apiQueryFiltersType = {
+export const apiQueryFilters: ApiQueryFiltersType = {
     //сортировка по рейтингу и году RATING YEAR
     order: 'RATING',
 

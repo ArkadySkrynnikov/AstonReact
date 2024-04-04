@@ -14,17 +14,20 @@ import {
 import { Input } from '../../shared/UI/Input/Input.tsx'
 import { Button } from '../../shared/UI/button/Button.tsx'
 import {
+    FilterOption,
     HighlightedContainer,
     MenuContainer,
     SearchForm,
     SearchFormControls,
+    SearchFormFilters,
+    SearchFormLabel,
 } from './Search.styled.ts'
 import { SuggestMenu } from '../../shared/UI/SuggestMenu/SuggestMenu.tsx'
 import useDebouncedValue from '../../shared/hooks/useDebouncedValue.tsx'
 import { getSuggestions } from '../../shared/reducers/Search/selectors/selectors.ts'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { apiQueryFilters } from '../../shared/consts/apiQueryStrings.ts'
-import { fetchFilmsSuggestions } from '../../shared/reducers/Search/slices/search.ts'
+import { fetchFilmsSuggestions } from '../../shared/reducers/Search/slices/searchSlice.ts'
 import { SEARCH } from '../../app/providers/router/routePaths/pathConstants.ts'
 import { Select } from '../../shared/UI/Select/Select.tsx'
 import {
@@ -46,6 +49,9 @@ export const Search: FunctionComponent = (): ReactElement => {
     //ввод пользователя
     const [term, setTerm] = useState<string>('')
     const debouncedTerm = useDebouncedValue(term, 800)
+
+    //фокус на форме
+    const [formFocus, setFormFocus] = useState(false)
 
     //обновление состояния строки инпута и параметров поиска
     const onChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -88,6 +94,16 @@ export const Search: FunctionComponent = (): ReactElement => {
         event,
     ) => {
         if (event.key === 'Enter') event.preventDefault()
+    }
+
+    // в случае фокуса показать саджесты
+    const formOnFocusHandler: FormEventHandler<HTMLFormElement> = () => {
+        setFormFocus(true)
+    }
+
+    //в случае расфокуса убрать саджесты
+    const formBlurHandler: FormEventHandler<HTMLFormElement> = () => {
+        setFormFocus(false)
     }
 
     const submitHandler: FormEventHandler<HTMLFormElement> = (event) => {
@@ -137,9 +153,11 @@ export const Search: FunctionComponent = (): ReactElement => {
                     autoComplete={'off'}
                     onKeyDown={formOnKeyDownHandler}
                     onSubmit={submitHandler}
+                    onFocus={formOnFocusHandler}
+                    onBlur={formBlurHandler}
                 >
-                    <div>
-                        <label>
+                    <SearchFormFilters>
+                        <SearchFormLabel>
                             Сортировать:
                             <Select
                                 name='selectSort'
@@ -148,14 +166,14 @@ export const Search: FunctionComponent = (): ReactElement => {
                             >
                                 {orderTypes.map((e, i) => {
                                     return (
-                                        <option key={i} value={e.type}>
+                                        <FilterOption key={i} value={e.type}>
                                             {e.title}
-                                        </option>
+                                        </FilterOption>
                                     )
                                 })}
                             </Select>
-                        </label>
-                        <label>
+                        </SearchFormLabel>
+                        <SearchFormLabel>
                             Тип:
                             <Select
                                 name='selectType'
@@ -164,14 +182,14 @@ export const Search: FunctionComponent = (): ReactElement => {
                             >
                                 {videoTypes.map((e, i) => {
                                     return (
-                                        <option key={i} value={e.type}>
+                                        <FilterOption key={i} value={e.type}>
                                             {e.title}
-                                        </option>
+                                        </FilterOption>
                                     )
                                 })}
                             </Select>
-                        </label>
-                        <label>
+                        </SearchFormLabel>
+                        <SearchFormLabel>
                             Минимальный рейтинг:
                             <Select
                                 name='selectMinRating'
@@ -180,14 +198,14 @@ export const Search: FunctionComponent = (): ReactElement => {
                             >
                                 {ratingValues.map((e, i) => {
                                     return (
-                                        <option key={i} value={e}>
+                                        <FilterOption key={i} value={e}>
                                             {e}
-                                        </option>
+                                        </FilterOption>
                                     )
                                 })}
                             </Select>
-                        </label>
-                    </div>
+                        </SearchFormLabel>
+                    </SearchFormFilters>
                     <SearchFormControls>
                         <Input
                             onChange={onChangeHandler}
@@ -201,7 +219,7 @@ export const Search: FunctionComponent = (): ReactElement => {
                         </Button>
                     </SearchFormControls>
                 </SearchForm>
-                {debouncedTerm && <SuggestMenu items={data.items} />}
+                {formFocus ? <SuggestMenu items={data.items} /> : ''}
             </HighlightedContainer>
         </MenuContainer>
     )

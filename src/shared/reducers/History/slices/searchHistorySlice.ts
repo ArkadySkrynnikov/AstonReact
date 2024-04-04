@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { apiQueryFiltersType } from '../../../types/apiData.ts'
+import { ApiQueryFiltersType } from '../../../types/apiData.ts'
 
 type searchHistorySliceInitialState = {
-    currentItemsInLs: apiQueryFiltersType[]
-    newItem: apiQueryFiltersType
+    currentItemsInLs: ApiQueryFiltersType[]
+    newItem: ApiQueryFiltersType
 }
 
 const initialState: searchHistorySliceInitialState = {
@@ -26,7 +26,7 @@ const searchHistorySlice = createSlice({
     reducers: {
         saveSearchHistory(
             state,
-            action: PayloadAction<{ data: apiQueryFiltersType; user: string }>,
+            action: PayloadAction<{ data: ApiQueryFiltersType; user: string }>,
         ) {
             //получаем массив поисковых запросов
             const itemsInLS = JSON.parse(

@@ -23,7 +23,7 @@ export const HistoryPage: FunctionComponent = (): ReactElement => {
 
     return (
         <Container>
-            <ItemsContainer>
+            <PositioningContainer>
                 {searchHistoryItems.map((e, i) => {
                     return (
                         <HistoryItem
@@ -34,7 +34,7 @@ export const HistoryPage: FunctionComponent = (): ReactElement => {
                         />
                     )
                 })}
-            </ItemsContainer>
+            </PositioningContainer>
         </Container>
     )
 }
@@ -45,7 +45,7 @@ const Container = styled.div`
     justify-content: center;
 `
 
-const ItemsContainer = styled.div`
+const PositioningContainer = styled.div`
     width: 1400px;
     display: flex;
     flex-direction: column;
