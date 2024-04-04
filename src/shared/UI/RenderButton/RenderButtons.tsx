@@ -2,6 +2,7 @@ import { FunctionComponent, memo } from 'react'
 import { Button } from '../button/Button.tsx'
 import { Link } from '../Link/Link.tsx'
 import { FilmItem } from '../../types/apiData.ts'
+import * as ROUTE_PATHS from '../../../app/providers/router/routePaths/pathConstants.ts'
 
 type ButtonProps = {
     isFavoritePage: boolean
@@ -22,7 +23,10 @@ export const RenderButtons: FunctionComponent<ButtonProps> = memo(
         if (isFavoritePage) {
             return (
                 <>
-                    <Link to={`/filmPage/${film.kinopoiskId}`} type={'route'}>
+                    <Link
+                        to={`${ROUTE_PATHS.GOTO_FILM_PAGE}${film.kinopoiskId}`}
+                        type={'route'}
+                    >
                         Подробнее
                     </Link>
                     <Button variant='secondary' onClick={onRemoveFromFavorites}>
@@ -33,7 +37,10 @@ export const RenderButtons: FunctionComponent<ButtonProps> = memo(
         } else {
             return (
                 <>
-                    <Link to={`/filmPage/${film.kinopoiskId}`} type={'route'}>
+                    <Link
+                        to={`${ROUTE_PATHS.GOTO_FILM_PAGE}${film.kinopoiskId}`}
+                        type={'route'}
+                    >
                         Подробнее
                     </Link>
                     <Button

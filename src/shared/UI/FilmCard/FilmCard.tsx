@@ -1,4 +1,10 @@
-import { FunctionComponent, memo, useEffect, useState } from 'react'
+import {
+    FunctionComponent,
+    memo,
+    useCallback,
+    useEffect,
+    useState,
+} from 'react'
 import { FilmItem } from '../../types/apiData.ts'
 import fallbackImage from '../../../assets/images/default-fallback.png'
 import { Link } from '../Link/Link.tsx'
@@ -15,6 +21,11 @@ import {
     FilmName,
     Poster,
 } from './filmCard.styled.ts'
+import * as ROUTE_PATHS from '../../../app/providers/router/routePaths/pathConstants.ts'
+import {
+    getFavoritesFromStorage,
+    updateFavoritesInStorage,
+} from '../../../features/utils/storageUtils.ts'
 
 type FilmCardProps = {
     film: FilmItem
@@ -28,44 +39,23 @@ export const FilmCard: FunctionComponent<FilmCardProps> = memo((props) => {
     const user = useAppSelector(getUser)
 
     useEffect(() => {
-        const favoritesFromStorage = JSON.parse(
-            localStorage.getItem(`favoriteMovies_${user.id}`) || '[]',
-        )
+        const favoritesFromStorage = getFavoritesFromStorage(user.id as string)
         if (favoritesFromStorage.includes(film.kinopoiskId)) {
             setToggle(true)
         }
     }, [film.kinopoiskId, user.id])
 
-    const handleAddToFavorites = () => {
+    const handleAddToFavorites = useCallback(() => {
         dispatch(addMovieToFavoriteDB(film))
         setToggle(true)
-        const favoritesFromStorage = JSON.parse(
-            localStorage.getItem(`favoriteMovies_${user.id}`) || '[]',
-        )
-        const updatedFavorites = [...favoritesFromStorage, film.kinopoiskId]
-        localStorage.setItem(
-            `favoriteMovies_${user.id}`,
-            JSON.stringify(updatedFavorites),
-        )
-    }
+        updateFavoritesInStorage(user.id as string, film.kinopoiskId, true)
+    }, [dispatch, film, user.id])
 
-    const handleRemoveFromFavorites = () => {
+    const handleRemoveFromFavorites = useCallback(() => {
         dispatch(removeMovieFromFavorites(film?.kinopoiskId))
         setToggle(false)
-
-        const favoritesFromStorage: number[] = JSON.parse(
-            localStorage.getItem(`favoriteMovies_${user.id}`) || '[]',
-        )
-
-        const updatedFavorites: number[] = favoritesFromStorage.filter(
-            (id: number) => id !== film.kinopoiskId,
-        )
-
-        localStorage.setItem(
-            `favoriteMovies_${user.id}`,
-            JSON.stringify(updatedFavorites),
-        )
-    }
+        updateFavoritesInStorage(user.id as string, film.kinopoiskId, false)
+    }, [dispatch, film, user.id])
 
     return (
         <Container>
@@ -89,7 +79,10 @@ export const FilmCard: FunctionComponent<FilmCardProps> = memo((props) => {
                         onRemoveFromFavorites={handleRemoveFromFavorites}
                     />
                 ) : (
-                    <Link to={`/filmPage/${film.kinopoiskId}`} type={'route'}>
+                    <Link
+                        to={`${ROUTE_PATHS.GOTO_FILM_PAGE}${film.kinopoiskId}`}
+                        type={'route'}
+                    >
                         Подробнее
                     </Link>
                 )}

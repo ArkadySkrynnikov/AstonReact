@@ -90,6 +90,7 @@ const StyledLink = styled(RouterLink)<{
     align-items: center;
 
     transition: 0.2s;
+
     &:hover {
         border: ${(props) =>
             props.$type === 'logo'

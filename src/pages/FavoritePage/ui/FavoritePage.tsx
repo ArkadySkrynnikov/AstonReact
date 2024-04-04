@@ -24,13 +24,13 @@ export const FavoritePage = () => {
     }, [user, navigate])
 
     return (
-        <div>
+        <>
             <h1>Избранное</h1>
             {favoriteMovies?.length ? (
                 <FavoriteMoviesContainer>
-                    {favoriteMovies.map((movie: FilmItem, index: number) => (
+                    {favoriteMovies.map((movie: FilmItem) => (
                         <FilmCard
-                            key={`${movie.kinopoiskId}-${index}`}
+                            key={movie.kinopoiskId}
                             film={movie}
                             isFavoritePage={true}
                         />
@@ -39,6 +39,6 @@ export const FavoritePage = () => {
             ) : (
                 <h2>Список пуст</h2>
             )}
-        </div>
+        </>
     )
 }

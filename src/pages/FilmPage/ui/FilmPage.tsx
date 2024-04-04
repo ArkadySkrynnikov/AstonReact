@@ -12,7 +12,6 @@ export const FilmPage = () => {
     const dispatch = useAppDispatch()
     const { id } = useParams()
     const { data } = useAppSelector(getFilmByID)
-
     useEffect(() => {
         dispatch(fetchFilmById(id!.toString()))
     }, [dispatch, id])

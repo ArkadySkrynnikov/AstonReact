@@ -10,8 +10,8 @@ import {
 } from '../slices/FavoriteSlices.tsx'
 
 export const addMovieToFavoriteDB = createAsyncThunk(
-    'favorite/addMovieToFavorite',
-    async (movie: FilmItem, { dispatch, getState }) => {
+    '@favorite/addMovieToFavorite',
+    async (movie: FilmItem, { dispatch, getState, rejectWithValue }) => {
         try {
             const state = getState() as RootState
             const user = state.userStore.user
@@ -23,14 +23,14 @@ export const addMovieToFavoriteDB = createAsyncThunk(
             await setDoc(doc(db, `${userId}`, movieId), movie)
             dispatch(addMovieToFavorite(movie))
         } catch (error) {
-            console.log(error)
+            return rejectWithValue(error)
         }
     },
 )
 
 export const removeMovieFromFavorites = createAsyncThunk(
-    'favorite/removeMovieFromFavorite',
-    async (kinopoiskId: number, { dispatch, getState }) => {
+    '@favorite/removeMovieFromFavorite',
+    async (kinopoiskId: number, { dispatch, getState, rejectWithValue }) => {
         try {
             const state = getState() as RootState
             const user = state.userStore.user
@@ -42,14 +42,14 @@ export const removeMovieFromFavorites = createAsyncThunk(
             await deleteDoc(doc(db, `${userId}`, movieId))
             dispatch(removeFromMovieToFavorite(kinopoiskId))
         } catch (error) {
-            console.log(error)
+            return rejectWithValue(error)
         }
     },
 )
 
 export const getFavoriteFromFirebaseDB = createAsyncThunk(
-    'favorite/getFavoriteFromFirebaseDB',
-    async (_, { getState, dispatch }) => {
+    '@favorite/getFavoriteFromFirebaseDB',
+    async (_, { getState, dispatch, rejectWithValue }) => {
         try {
             const state = getState() as RootState
             const user = state.userStore.user
@@ -64,7 +64,7 @@ export const getFavoriteFromFirebaseDB = createAsyncThunk(
             )
             dispatch(updateFavorite(favoriteMovies))
         } catch (error) {
-            console.log(error)
+            return rejectWithValue(error)
         }
     },
 )
