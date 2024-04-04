@@ -8,11 +8,19 @@ import { getSearchHistory } from '../../../shared/reducers/History/selectors/sel
 import { updateSearchHistory } from '../../../shared/reducers/History/slices/searchHistorySlice.ts'
 import styled from 'styled-components'
 import { HistoryItem } from '../../../shared/UI/HistoryItem/HistoryItem.tsx'
+import { baseTheme } from '../../../app/styles/theme.ts'
 
 export const HistoryPage: FunctionComponent = (): ReactElement => {
-    const dispatch = useAppDispatch()
     const user = useAppSelector(getUser)
+    const itemsInLS = JSON.parse(localStorage.getItem(user.username!)!)
+    const dispatch = useAppDispatch()
     const searchHistoryItems = useAppSelector(getSearchHistory)
+
+    useEffect(() => {
+        if (itemsInLS === null) {
+            localStorage.setItem(user.username!, '[]')
+        }
+    }, [itemsInLS, user.username])
 
     useEffect(() => {
         //два ререндера и только потом юзер обновляется
@@ -24,16 +32,20 @@ export const HistoryPage: FunctionComponent = (): ReactElement => {
     return (
         <Container>
             <PositioningContainer>
-                {searchHistoryItems.map((e, i) => {
-                    return (
-                        <HistoryItem
-                            username={user.username!}
-                            id={i}
-                            filters={e}
-                            key={i}
-                        />
-                    )
-                })}
+                {searchHistoryItems.length > 0 ? (
+                    searchHistoryItems.map((e, i) => {
+                        return (
+                            <HistoryItem
+                                username={user.username!}
+                                id={i}
+                                filters={e}
+                                key={i}
+                            />
+                        )
+                    })
+                ) : (
+                    <HistorySpan>Ваша история пуста</HistorySpan>
+                )}
             </PositioningContainer>
         </Container>
     )
@@ -50,4 +62,10 @@ const PositioningContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+`
+
+const HistorySpan = styled.span`
+    margin-left: auto;
+    margin-right: auto;
+    ${baseTheme.font.GeistMono}
 `
