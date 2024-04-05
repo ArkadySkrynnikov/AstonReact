@@ -6,9 +6,10 @@ import {
 import { useEffect } from 'react'
 import { getFilmsData } from '../../../shared/reducers/Search/selectors/selectors.ts'
 import FilmList from '../../../shared/UI/FilmList/FilmList.tsx'
-import { Container, FilmsContainer } from './search.styled.ts'
+import { FilmsContainer } from './search.styled.ts'
 import { fetchFilmsList } from '../../../shared/reducers/Search/slices/searchSlice.ts'
 import { Search } from '../../../widgets/search/Search.tsx'
+import { Container } from '../../MainPage/ui/main.styled.ts'
 
 export const SearchPage = () => {
     const location = useLocation()

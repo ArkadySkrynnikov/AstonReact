@@ -85,10 +85,10 @@ export const FormRegister = ({ title, onSubmit }: Props) => {
                 </AuthorizationField>
                 {passwordError && <ErrorField>{passwordError}</ErrorField>}
                 <Button variant='primary'>SUBMIT</Button>
+                <Link type='route' to={ROUTE_PATHS.LOGIN}>
+                    Already have an account? Sign in!
+                </Link>
             </AuthorizationForm>
-            <Link type='route' to={ROUTE_PATHS.LOGIN}>
-                Already have an account? Sign in!
-            </Link>
         </LoginWrapper>
     )
 }

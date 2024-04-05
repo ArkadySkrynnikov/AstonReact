@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FunctionComponent, ReactElement } from 'react'
-import styled from 'styled-components'
+import { StyledSelect } from './select.styled.ts'
 
 type SelectProps = {
     name: string
@@ -20,9 +20,5 @@ const Select: FunctionComponent<SelectProps> = ({
         </StyledSelect>
     )
 }
-
-const StyledSelect = styled.select`
-    margin: 3px 5px 0 3px;
-`
 
 export { Select }
