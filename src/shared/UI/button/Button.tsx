@@ -34,6 +34,8 @@ const StyledButton = styled.button<{
 
     &:disabled {
         cursor: not-allowed;
+        background-color: ${baseTheme.background.button.hover};
+        color: ${baseTheme.color.button.hover};
     }
 `
 

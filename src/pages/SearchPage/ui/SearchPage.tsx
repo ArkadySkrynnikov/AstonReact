@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import { Search } from '../../../widgets/search/Search.tsx'
+import { Search } from '../../../widgets/defaultSearch/Search.tsx'
 import {
     useAppDispatch,
     useAppSelector,
@@ -7,8 +7,8 @@ import {
 import { useEffect } from 'react'
 import { getFilmsData } from '../../../shared/reducers/Search/selectors/selectors.ts'
 import FilmList from '../../../shared/UI/FilmList/FilmList.tsx'
-import { fetchFilmsList } from '../../../shared/reducers/Search/slices/searchSlice.ts'
-import styled from 'styled-components'
+import { fetchFilmsList } from '../../../shared/reducers/Search/slices/search.ts'
+import { Container, FilmsContainer } from './search.styled.ts'
 
 export const SearchPage = () => {
     const location = useLocation()
@@ -30,15 +30,3 @@ export const SearchPage = () => {
         </>
     )
 }
-
-const Container = styled.div`
-    display: flex;
-    justify-content: center;
-`
-
-const FilmsContainer = styled.div`
-    width: 1400px;
-    display: flex;
-    flex-flow: row wrap;
-    gap: 40px;
-`

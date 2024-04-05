@@ -7,8 +7,12 @@ const FilmList: FunctionComponent<Pick<ApiData, 'items'>> = ({
 }): ReactElement => {
     return (
         <Suspense fallback={<span>Loading...</span>}>
-            {items.map((e) => (
-                <FilmCard key={e.kinopoiskId} {...e} />
+            {items.map((movie) => (
+                <FilmCard
+                    key={movie.kinopoiskId}
+                    film={movie}
+                    isFavoritePage={false}
+                />
             ))}
         </Suspense>
     )

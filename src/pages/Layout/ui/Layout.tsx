@@ -17,7 +17,6 @@ import { Loader } from '../../../shared/UI/Loader/Loader.tsx'
 
 export const Layout = () => {
     const dispatch = useAppDispatch()
-
     const user = useAppSelector(getUser)
 
     const logOutFn = () => {

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { baseTheme } from '../../../app/styles/theme.ts'
 
 export const LoginWrapper = styled.div`
     height: 100vh;
@@ -11,7 +12,7 @@ export const LoginWrapper = styled.div`
 
 export const Title = styled.h1`
     font-size: 45px;
-    color: black;
+    ${baseTheme.font.GeistMono}
 `
 
 export const AuthorizationForm = styled.form`
@@ -35,7 +36,6 @@ export const Input = styled.input`
     width: 280px;
     padding: 8px 0 5px 0;
     font-size: 16px;
-    color: black;
 
     &:focus {
         border: none;
@@ -44,61 +44,22 @@ export const Input = styled.input`
     }
 `
 export const Label = styled.label`
+    ${baseTheme.font.GeistMono}
     font-size: 15px;
     position: absolute;
     top: -10px;
     left: 0;
-    color: black;
     pointer-events: none;
     transition: all 0.5s ease-in-out;
 
     ${Input}:focus ~ & {
         top: -14px;
         font-size: 14px;
-        color: black;
     }
 `
 
 export const ErrorField = styled.span`
+    ${baseTheme.font.GeistMono}
     font-size: 13px;
     text-align: center;
-`
-
-export const Button = styled.button`
-    width: 300px;
-    height: 52px;
-    background-color: black;
-    color: white;
-    padding: 15px 15px;
-    border: none;
-    font-size: 17px;
-    cursor: pointer;
-    transition: 0.2s transform ease-in-out;
-    will-change: transform;
-    z-index: 0;
-    position: relative;
-    overflow: hidden;
-
-    &:after {
-        border-radius: 3rem;
-        content: '';
-        display: block;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        transform: translate(-100%, 0) rotate(10deg);
-        transform-origin: top left;
-        transition: 0.4s transform ease-out;
-        will-change: transform;
-        z-index: -1;
-    }
-
-    &:hover {
-        border: 1px solid aqua;
-        color: grey;
-        transform: scale(1.05);
-        will-change: transform;
-    }
 `

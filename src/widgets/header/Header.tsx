@@ -1,64 +1,19 @@
-import styled from 'styled-components'
-import { baseTheme } from '../../app/styles/theme.ts'
 import { Link } from '../../shared/UI/Link/Link.tsx'
 import logo from '../../assets/icons/icons8-film-reel-96.png'
-import { FunctionComponent, ReactElement } from 'react'
+import { FunctionComponent, ReactElement, useContext } from 'react'
 import profile from '../../assets/icons/icons8-profile-picture-96.png'
 import { Button } from '../../shared/UI/button/Button.tsx'
-
-const StyledHeader = styled.header`
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: inset 0 -2px rgba(0, 0, 0, 0.08);
-`
-
-const NavBar = styled.nav`
-    & a:not(:last-child) {
-        margin-right: 10px;
-    }
-`
-
-const Container = styled.div`
-    width: ${baseTheme.container.desktop};
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`
-
-const Span = styled.span`
-    ${baseTheme.font.GeistMono}
-`
-
-const Image = styled.img`
-    width: 30px;
-    height: 30px;
-`
-
-const LogoContainer = styled.article`
-    display: flex;
-    align-items: center;
-    & img {
-        margin-right: 20px;
-    }
-`
-
-const Profile = styled.div`
-    display: flex;
-    align-items: center;
-    & img {
-        margin-right: 20px;
-    }
-
-    & span {
-        margin-right: 20px;
-    }
-
-    & a:not(:last-child) {
-        margin-right: 20px;
-    }
-`
+import {
+    Container,
+    LogoContainer,
+    NavBar,
+    Span,
+    StyledHeader,
+    Image,
+    Profile,
+    ThemeButton,
+} from './header.styled.ts'
+import { ThemeContext } from '../../app/context/ThemeContext.tsx'
 
 type HeaderProps = {
     username: string | null
@@ -71,6 +26,8 @@ const Header: FunctionComponent<HeaderProps> = ({
     isAuth,
     logOutFn,
 }): ReactElement => {
+    const { toggleTheme } = useContext(ThemeContext)
+
     return (
         <StyledHeader>
             <Container>
@@ -79,8 +36,8 @@ const Header: FunctionComponent<HeaderProps> = ({
                         <Image src={logo} />
                         <Span>Search Films</Span>
                     </Link>
+                    <ThemeButton onClick={toggleTheme}></ThemeButton>
                 </LogoContainer>
-
                 {isAuth && (
                     <NavBar>
                         <Link type={'route'} to={'/history'}>

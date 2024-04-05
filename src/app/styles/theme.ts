@@ -31,6 +31,8 @@ export const baseTheme = {
             primary: '#ffffff',
             secondary: '#ffffff',
             hover: '#000000',
+            white: '#ffffff',
+            grey: '#808080',
         },
     },
     borderRadius: {
