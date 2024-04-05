@@ -1,9 +1,11 @@
-export const apiQueryFilters = {
+import { ApiQueryFiltersType } from '../types/apiData.ts'
+
+export const apiQueryFilters: ApiQueryFiltersType = {
     //сортировка по рейтингу и году RATING YEAR
     order: 'RATING',
 
     //сортировка по типу FILM TV_SHOW TV_SERIES MINI_SERIES ALL
-    type: 'FILM',
+    type: 'ALL',
 
     //минимальный рейтинг цифра 123456789 10
     ratingFrom: '1',

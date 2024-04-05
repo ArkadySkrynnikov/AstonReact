@@ -3,7 +3,7 @@ import { ApiData, FilmsInitialState } from '../../../types/apiData.ts'
 import { fetchFilms } from '../../../api/fetchFilms.ts'
 
 export const fetchFilmsSuggestions = createAsyncThunk(
-    'fetchFilmsSuggestions',
+    '@films/fetchFilmsSuggestions',
     async (queryString: string, { rejectWithValue }) => {
         try {
             return await fetchFilms('?' + queryString)
@@ -14,7 +14,7 @@ export const fetchFilmsSuggestions = createAsyncThunk(
 )
 
 export const fetchFilmsList = createAsyncThunk(
-    'fetchFilmsList',
+    '@films/fetchFilmsList',
     async (queryString: string, { rejectWithValue }) => {
         try {
             return await fetchFilms('?' + queryString)
@@ -25,7 +25,7 @@ export const fetchFilmsList = createAsyncThunk(
 )
 
 export const fetchFilmsCollections = createAsyncThunk(
-    'fetchFilmsCollections',
+    '@films/fetchFilmsCollections',
     async (queryString: string, { rejectWithValue }) => {
         try {
             return await fetchFilms('/collections?' + queryString)
@@ -72,7 +72,7 @@ const initialState: SearchInitialState = {
 }
 
 const searchFilms = createSlice({
-    name: 'searchFilms',
+    name: 'searchFilmsLists',
     initialState,
     reducers: {},
     extraReducers: (builder) => {

@@ -3,6 +3,7 @@ import userReducer from '../../../shared/reducers/Auth/slices/userSlice.tsx'
 import searchFilmByIdReducer from '../../../shared/reducers/Search/slices/searchById.ts'
 import searchFilmsReducer from '../../../shared/reducers/Search/slices/search.ts'
 import userFavoriteReducer from '../../../shared/reducers/Favorite/slices/FavoriteSlices.tsx'
+import searchHistoryReducer from '../../../shared/reducers/History/slices/searchHistorySlice.ts'
 
 export const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
         searchById: searchFilmByIdReducer,
         searchFilms: searchFilmsReducer,
         favorite: userFavoriteReducer,
+        searchHistory: searchHistoryReducer,
     },
 })
 

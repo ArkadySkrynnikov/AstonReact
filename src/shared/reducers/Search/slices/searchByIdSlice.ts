@@ -3,7 +3,7 @@ import { FilmByIdInitialState, FilmInfo } from '../../../types/apiData.ts'
 import { fetchFilms } from '../../../api/fetchFilms.ts'
 
 export const fetchFilmById = createAsyncThunk(
-    'fetchFilmById',
+    '@films/fetchFilmById',
     async (queryString: string) => {
         return await fetchFilms('/' + queryString)
     },

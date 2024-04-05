@@ -1,4 +1,5 @@
 import { Search } from '../../../widgets/defaultSearch/Search.tsx'
+import styled from 'styled-components'
 import { lazy, useEffect } from 'react'
 import {
     useAppDispatch,

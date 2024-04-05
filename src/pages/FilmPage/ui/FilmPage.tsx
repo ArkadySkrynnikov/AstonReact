@@ -4,7 +4,7 @@ import {
     useAppDispatch,
     useAppSelector,
 } from '../../../shared/hooks/redux-hooks.ts'
-import { fetchFilmById } from '../../../shared/reducers/Search/slices/searchById.ts'
+import { fetchFilmById } from '../../../shared/reducers/Search/slices/searchByIdSlice.ts'
 import { getFilmByID } from '../../../shared/reducers/Search/selectors/selectors.ts'
 import { Container, Image } from './FilmPage.styled.ts'
 
