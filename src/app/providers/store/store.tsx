@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userReducer from '../../../shared/reducers/Auth/slices/userSlice.tsx'
-import searchFilmByIdReducer from '../../../shared/reducers/Search/slices/searchById.ts'
-import searchFilmsReducer from '../../../shared/reducers/Search/slices/search.ts'
+import searchFilmByIdReducer from '../../../shared/reducers/Search/slices/searchByIdSlice.ts'
+import searchFilmsReducer from '../../../shared/reducers/Search/slices/searchSlice.ts'
 import userFavoriteReducer from '../../../shared/reducers/Favorite/slices/FavoriteSlices.tsx'
 import searchHistoryReducer from '../../../shared/reducers/History/slices/searchHistorySlice.ts'
 
