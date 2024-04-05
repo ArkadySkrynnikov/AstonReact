@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import { Search } from '../../../widgets/defaultSearch/Search.tsx'
+import { Search } from '../../../widgets/search/Search.tsx'
 import {
     useAppDispatch,
     useAppSelector,
@@ -7,7 +7,7 @@ import {
 import { useEffect } from 'react'
 import { getFilmsData } from '../../../shared/reducers/Search/selectors/selectors.ts'
 import FilmList from '../../../shared/UI/FilmList/FilmList.tsx'
-import { fetchFilmsList } from '../../../shared/reducers/Search/slices/search.ts'
+import { fetchFilmsList } from '../../../shared/reducers/Search/slices/searchSlice.ts'
 import styled from 'styled-components'
 
 export const SearchPage = () => {

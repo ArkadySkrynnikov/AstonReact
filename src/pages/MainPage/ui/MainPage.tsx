@@ -1,4 +1,4 @@
-import { Search } from '../../../widgets/defaultSearch/Search.tsx'
+import { Search } from '../../../widgets/search/Search.tsx'
 import styled from 'styled-components'
 import { lazy, useEffect } from 'react'
 import {
@@ -6,7 +6,7 @@ import {
     useAppSelector,
 } from '../../../shared/hooks/redux-hooks.ts'
 import { getCollectionsData } from '../../../shared/reducers/Search/selectors/selectors.ts'
-import { fetchFilmsCollections } from '../../../shared/reducers/Search/slices/search.ts'
+import { fetchFilmsCollections } from '../../../shared/reducers/Search/slices/searchSlice.ts'
 import { apiQueryCollections } from '../../../shared/consts/apiQueryStrings.ts'
 
 const FilmList = lazy(() => import('../../../shared/UI/FilmList/FilmList.tsx'))

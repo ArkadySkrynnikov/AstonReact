@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { PrivateRoute } from '../../../pages/PrivateRoute/ui/PrivateRoute.tsx'
 import * as ROUTE_PATHS from './routePaths/pathConstants.ts'
-import { lazy } from 'react'
+import { lazy, Suspense } from 'react'
+import { Loader } from '../../../shared/UI/Loader/Loader.tsx'
 
 const Layout = lazy(() => import('../../../pages/Layout/index.ts'))
 const MainPage = lazy(() => import('../../../pages/MainPage/index.ts'))
@@ -38,18 +39,34 @@ export const router = createBrowserRouter([
     },
     {
         path: ROUTE_PATHS.LOGIN,
-        element: <LoginPage />,
+        element: (
+            <Suspense fallback={<Loader />}>
+                <LoginPage />
+            </Suspense>
+        ),
     },
     {
         path: ROUTE_PATHS.REGISTER,
-        element: <RegisterPage />,
+        element: (
+            <Suspense fallback={<Loader />}>
+                <RegisterPage />
+            </Suspense>
+        ),
     },
     {
         path: ROUTE_PATHS.NOT_FOUND,
-        element: <NotFoundPage />,
+        element: (
+            <Suspense fallback={<Loader />}>
+                <NotFoundPage />
+            </Suspense>
+        ),
     },
     {
         path: ROUTE_PATHS.FILM_PAGE,
-        element: <FilmPage />,
+        element: (
+            <Suspense fallback={<Loader />}>
+                <FilmPage />
+            </Suspense>
+        ),
     },
 ])

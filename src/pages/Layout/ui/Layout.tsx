@@ -1,4 +1,7 @@
-import { removeUser } from '../../../shared/reducers/Auth/slices/userSlice.tsx'
+import {
+    removeUser,
+    setUser,
+} from '../../../shared/reducers/Auth/slices/userSlice.tsx'
 import {
     useAppDispatch,
     useAppSelector,
@@ -8,6 +11,9 @@ import { Header } from '../../../widgets/header/Header.tsx'
 import { getUser } from '../../../shared/reducers/Auth/selectors/selectors.tsx'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../../firebase.ts'
+import { useCheckAuth } from '../../../shared/hooks/useCheckAuth.tsx'
+import { Suspense, useEffect } from 'react'
+import { Loader } from '../../../shared/UI/Loader/Loader.tsx'
 
 export const Layout = () => {
     const dispatch = useAppDispatch()
@@ -20,6 +26,23 @@ export const Layout = () => {
         })
     }
 
+    const signedUser = useCheckAuth()
+
+    useEffect(() => {
+        if (signedUser) {
+            dispatch(
+                setUser({
+                    isAuth: true,
+                    email: signedUser.email,
+                    username: signedUser.displayName,
+                    id: signedUser.uid,
+                    token: signedUser.refreshToken,
+                }),
+            )
+            localStorage.setItem('isAuthenticated', 'true')
+        }
+    }, [signedUser, dispatch])
+
     return (
         <>
             <Header
@@ -27,7 +50,9 @@ export const Layout = () => {
                 isAuth={user.isAuth}
                 logOutFn={logOutFn}
             />
-            <Outlet />
+            <Suspense fallback={<Loader />}>
+                <Outlet />
+            </Suspense>
         </>
     )
 }

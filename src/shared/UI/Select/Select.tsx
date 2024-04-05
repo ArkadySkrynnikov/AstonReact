@@ -1,4 +1,5 @@
 import { ChangeEventHandler, FunctionComponent, ReactElement } from 'react'
+import styled from 'styled-components'
 
 type SelectProps = {
     name: string
@@ -14,10 +15,14 @@ const Select: FunctionComponent<SelectProps> = ({
     children,
 }): ReactElement => {
     return (
-        <select name={name} value={value} onChange={onChange}>
+        <StyledSelect name={name} value={value} onChange={onChange}>
             {children}
-        </select>
+        </StyledSelect>
     )
 }
+
+const StyledSelect = styled.select`
+    margin: 3px 5px 0 3px;
+`
 
 export { Select }
