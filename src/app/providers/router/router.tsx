@@ -35,6 +35,10 @@ export const router = createBrowserRouter([
                 path: ROUTE_PATHS.SEARCH,
                 element: <SearchPage />,
             },
+            {
+                path: ROUTE_PATHS.FILM_PAGE,
+                element: <FilmPage />,
+            },
         ],
     },
     {
@@ -58,14 +62,6 @@ export const router = createBrowserRouter([
         element: (
             <Suspense fallback={<Loader />}>
                 <NotFoundPage />
-            </Suspense>
-        ),
-    },
-    {
-        path: ROUTE_PATHS.FILM_PAGE,
-        element: (
-            <Suspense fallback={<Loader />}>
-                <FilmPage />
             </Suspense>
         ),
     },
