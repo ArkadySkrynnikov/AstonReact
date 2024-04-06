@@ -2,6 +2,7 @@ import {
     FunctionComponent,
     memo,
     useCallback,
+    useContext,
     useEffect,
     useState,
 } from 'react'
@@ -26,6 +27,8 @@ import {
     getFavoritesFromStorage,
     updateFavoritesInStorage,
 } from '../../../features/utils/storageUtils.ts'
+import { FeatureContext } from '../../../app/context/FeatureFlag.tsx'
+import { GOTO_FILM_PAGE } from '../../../app/providers/router/routePaths/pathConstants.ts'
 
 type FilmCardProps = {
     film: FilmItem
@@ -37,6 +40,7 @@ export const FilmCard: FunctionComponent<FilmCardProps> = memo((props) => {
     const [toggle, setToggle] = useState<boolean>(false)
     const dispatch = useAppDispatch()
     const user = useAppSelector(getUser)
+    const { isTelegramShareEnabled } = useContext(FeatureContext)
 
     useEffect(() => {
         const favoritesFromStorage = getFavoritesFromStorage(user.id as string)
@@ -56,6 +60,8 @@ export const FilmCard: FunctionComponent<FilmCardProps> = memo((props) => {
         setToggle(false)
         updateFavoritesInStorage(user.id as string, film.kinopoiskId, false)
     }, [dispatch, film, user.id])
+
+    const urlToShare = `https://t.me/share/url?url=http://localhost:5173${GOTO_FILM_PAGE}${film.kinopoiskId}&text=${film.nameRu}`
 
     return (
         <Container>
@@ -84,6 +90,11 @@ export const FilmCard: FunctionComponent<FilmCardProps> = memo((props) => {
                         type={'route'}
                     >
                         Подробнее
+                    </Link>
+                )}
+                {isTelegramShareEnabled && (
+                    <Link type={'route'} to={urlToShare}>
+                        Поделиться
                     </Link>
                 )}
             </FilmContainer>

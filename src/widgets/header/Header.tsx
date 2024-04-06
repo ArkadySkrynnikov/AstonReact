@@ -14,6 +14,7 @@ import {
     ThemeButton,
 } from './header.styled.ts'
 import { ThemeContext } from '../../app/context/ThemeContext.tsx'
+import { FeatureContext } from '../../app/context/FeatureFlag.tsx'
 
 type HeaderProps = {
     username: string | null
@@ -27,6 +28,7 @@ const Header: FunctionComponent<HeaderProps> = ({
     logOutFn,
 }): ReactElement => {
     const { toggleTheme } = useContext(ThemeContext)
+    const { isTelegramShareEnabled, toggleFeature } = useContext(FeatureContext)
 
     return (
         <StyledHeader>
@@ -37,6 +39,13 @@ const Header: FunctionComponent<HeaderProps> = ({
                         <Span>Search Films</Span>
                     </Link>
                     <ThemeButton onClick={toggleTheme}></ThemeButton>
+                    {isTelegramShareEnabled ? (
+                        ''
+                    ) : (
+                        <Button variant={'secondary'} onClick={toggleFeature}>
+                            {String.fromCodePoint(127987)}
+                        </Button>
+                    )}
                 </LogoContainer>
                 {isAuth && (
                     <NavBar>
