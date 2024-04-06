@@ -3,9 +3,7 @@ import {
     FunctionComponent,
     ReactElement,
     Suspense,
-    useEffect,
     useMemo,
-    useState,
 } from 'react'
 import {
     useAppDispatch,
@@ -33,24 +31,15 @@ export const FeatureFlagsProvider: FunctionComponent<
 > = ({ children }) => {
     const dispatch = useAppDispatch()
     const { data } = useAppSelector(getFeature)
-    const [wantEnable, setWantEnable] = useState(false)
 
     const contextValue = useMemo((): FeatureFlagContextType => {
         return {
             toggleFeature: () => {
-                setWantEnable(true)
+                dispatch(fetchFeatureShare())
             },
             isTelegramShareEnabled: data.isTelegramShareEnabled,
         }
-    }, [data.isTelegramShareEnabled])
-
-    useEffect(() => {
-        if (wantEnable) {
-            dispatch(fetchFeatureShare())
-        }
-    }, [dispatch, wantEnable])
-
-    console.log(wantEnable)
+    }, [data.isTelegramShareEnabled, dispatch])
 
     return (
         <Suspense fallback={<span>Loading...</span>}>
