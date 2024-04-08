@@ -58,10 +58,10 @@ export const FormLogin = ({ title, onSubmit }: Props) => {
                     )}
                 </AuthorizationField>
                 <Button variant='primary'>SUBMIT</Button>
+                <Link type='route' to={ROUTE_PATHS.REGISTER}>
+                    Dont have account? Lets register!
+                </Link>
             </AuthorizationForm>
-            <Link type='route' to={ROUTE_PATHS.REGISTER}>
-                Dont have account? Lets register!
-            </Link>
         </LoginWrapper>
     )
 }

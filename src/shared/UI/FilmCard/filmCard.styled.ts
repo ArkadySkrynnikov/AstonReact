@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { baseTheme } from '../../../app/styles/theme.ts'
 
-export const Container = styled.div`
+export const FilmCardContainer = styled.div`
     ${baseTheme.font.GeistMono}
     width: 300px;
     background-color: #ffffff;
@@ -12,11 +12,18 @@ export const Container = styled.div`
 export const FilmContainer = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     padding: 4px 8px;
+    gap: 15px;
+`
+export const FilmCardInfo = styled.div`
+    display: flex;
+    gap: 30px;
+`
+export const AboutFilm = styled.div`
+    display: flex;
+    flex-direction: column;
     gap: 5px;
 `
-
 export const Poster = styled.img`
     max-height: 150px;
     border-radius: 8px;
@@ -27,4 +34,13 @@ export const FilmName = styled.span`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: center;
+    font-size: 22px;
+`
+
+export const FilmCardButton = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
 `

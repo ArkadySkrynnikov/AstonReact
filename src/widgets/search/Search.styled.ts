@@ -3,7 +3,7 @@ import { baseTheme } from '../../app/styles/theme.ts'
 
 export const MenuContainer = styled.div`
     margin-top: 20px;
-    padding-bottom: 80px;
+    padding-bottom: 95px;
     display: flex;
     justify-content: center;
     position: relative;
@@ -17,6 +17,7 @@ export const Container = styled.div`
 export const SearchForm = styled.form`
     display: flex;
     flex-flow: column;
+    gap: 10px;
 
     width: 50vw;
     & button {

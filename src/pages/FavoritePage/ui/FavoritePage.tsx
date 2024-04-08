@@ -1,4 +1,4 @@
-import { FavoriteMoviesContainer } from './favorites.styled.ts'
+import { FavoriteMoviesContainer, FavoriteSpan } from './favorites.styled.ts'
 import {
     useAppDispatch,
     useAppSelector,
@@ -12,6 +12,7 @@ import { getUser } from '../../../shared/reducers/Auth/selectors/selectors.tsx'
 import { useEffect } from 'react'
 import * as ROUTE_PATHS from '../../../app/providers/router/routePaths/pathConstants.ts'
 import { getFavoriteFromFirebaseDB } from '../../../shared/reducers/Favorite/actions/FavoriteActions.tsx'
+import { Container } from '../../MainPage/ui/main.styled.ts'
 
 export const FavoritePage = () => {
     const favoriteMovies = useAppSelector(getFavorites)
@@ -31,20 +32,21 @@ export const FavoritePage = () => {
 
     return (
         <>
-            <h1>Избранное</h1>
-            {favoriteMovies?.length ? (
+            <Container>
                 <FavoriteMoviesContainer>
-                    {favoriteMovies.map((movie: FilmItem) => (
-                        <FilmCard
-                            key={movie.kinopoiskId}
-                            film={movie}
-                            isFavoritePage={true}
-                        />
-                    ))}
+                    {favoriteMovies?.length ? (
+                        favoriteMovies.map((movie: FilmItem) => (
+                            <FilmCard
+                                key={movie.kinopoiskId}
+                                film={movie}
+                                isFavoritePage={true}
+                            />
+                        ))
+                    ) : (
+                        <FavoriteSpan>Ваши избранные пусты</FavoriteSpan>
+                    )}
                 </FavoriteMoviesContainer>
-            ) : (
-                <h2>Список пуст</h2>
-            )}
+            </Container>
         </>
     )
 }

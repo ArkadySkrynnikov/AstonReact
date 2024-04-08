@@ -17,10 +17,13 @@ import {
 } from '../../reducers/Favorite/actions/FavoriteActions.tsx'
 import { RenderButtons } from '../RenderButton/RenderButtons.tsx'
 import {
-    Container,
+    FilmCardContainer,
     FilmContainer,
     FilmName,
     Poster,
+    FilmCardButton,
+    FilmCardInfo,
+    AboutFilm,
 } from './filmCard.styled.ts'
 import * as ROUTE_PATHS from '../../../app/providers/router/routePaths/pathConstants.ts'
 import {
@@ -64,41 +67,50 @@ export const FilmCard: FunctionComponent<FilmCardProps> = memo((props) => {
     const urlToShare = `https://t.me/share/url?url=http://localhost:5173${GOTO_FILM_PAGE}${film.kinopoiskId}&text=${film.nameRu}`
 
     return (
-        <Container>
+        <FilmCardContainer>
             <FilmContainer>
-                {film.posterUrl ? (
-                    <Poster src={film.posterUrl} loading='lazy' />
-                ) : (
-                    <Poster src={fallbackImage} loading='lazy' />
-                )}
-                <FilmName>{film.nameRu || film.nameEn}</FilmName>
-                <span>
-                    {'Рейтинг: ' + (film.ratingKinopoisk || film.ratingImdb)}
-                </span>
-                <span>{'Год: ' + film.year}</span>
-                {user.isAuth ? (
-                    <RenderButtons
-                        isFavoritePage={isFavoritePage}
-                        film={film}
-                        toggle={toggle}
-                        onAddToFavorites={handleAddToFavorites}
-                        onRemoveFromFavorites={handleRemoveFromFavorites}
-                    />
-                ) : (
-                    <Link
-                        to={`${ROUTE_PATHS.GOTO_FILM_PAGE}${film.kinopoiskId}`}
-                        type={'route'}
-                    >
-                        Подробнее
-                    </Link>
-                )}
-                {isTelegramShareEnabled && (
+                <FilmCardInfo>
+                    {film.posterUrl ? (
+                        <Poster src={film.posterUrl} loading='lazy' />
+                    ) : (
+                        <Poster src={fallbackImage} loading='lazy' />
+                    )}
+                    <AboutFilm>
+                        <span>
+                            {'Рейтинг: ' +
+                                (film.ratingKinopoisk || film.ratingImdb)}
+                        </span>
+                        <span>{'Год: ' + film.year}</span>
+                    </AboutFilm>
+                </FilmCardInfo>
+                <FilmName>
+                    {film.nameRu || film.nameEn || film.nameOriginal}
+                </FilmName>
+                <FilmCardButton>
+                    {user.isAuth ? (
+                        <RenderButtons
+                            isFavoritePage={isFavoritePage}
+                            film={film}
+                            toggle={toggle}
+                            onAddToFavorites={handleAddToFavorites}
+                            onRemoveFromFavorites={handleRemoveFromFavorites}
+                        />
+                    ) : (
+                        <Link
+                            to={`${ROUTE_PATHS.GOTO_FILM_PAGE}${film.kinopoiskId}`}
+                            type={'route'}
+                        >
+                            Подробнее
+                        </Link>
+                    )}
+                    {isTelegramShareEnabled && (
                     <Link type={'route'} to={urlToShare} target={'_blank'}>
                         Поделиться
                     </Link>
-                )}
+                    )}
+                </FilmCardButton>
             </FilmContainer>
-        </Container>
+        </FilmCardContainer>
     )
 })
 
