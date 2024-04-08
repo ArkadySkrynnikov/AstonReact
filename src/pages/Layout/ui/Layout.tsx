@@ -1,14 +1,14 @@
 import {
     removeUser,
     setUser,
-} from '../../../shared/reducers/Auth/slices/userSlice.tsx'
+} from '../../../shared/reducers/Auth/slices/userSlice.ts'
 import {
     useAppDispatch,
     useAppSelector,
 } from '../../../shared/hooks/redux-hooks.ts'
 import { Outlet } from 'react-router-dom'
 import { Header } from '../../../widgets/header/Header.tsx'
-import { getUser } from '../../../shared/reducers/Auth/selectors/selectors.tsx'
+import { getUser } from '../../../shared/reducers/Auth/selectors/selectors.ts'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../../firebase.ts'
 import { useCheckAuth } from '../../../shared/hooks/useCheckAuth.tsx'

@@ -47,7 +47,7 @@ export const FilmPage = () => {
                         <FilmGenre>
                             Жанры:
                             {data.genres.map((e, i) => {
-                                return <span key={i}>{e.genre}</span>
+                                return <span key={i}>{' ' + e.genre}</span>
                             })}
                         </FilmGenre>
                         <FilmDescription>
@@ -59,7 +59,7 @@ export const FilmPage = () => {
                         <FilmCountry>
                             Страны:
                             {data.countries.map((e, i) => {
-                                return <span key={i}>{e.country}</span>
+                                return <span key={i}>{' ' + e.country}</span>
                             })}
                         </FilmCountry>
                     </FilmPageInfo>

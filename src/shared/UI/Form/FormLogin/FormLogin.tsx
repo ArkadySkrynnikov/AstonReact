@@ -13,7 +13,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { IForm, Props } from '../Form.tsx'
 import * as ROUTE_PATHS from '../../../../app/providers/router/routePaths/pathConstants.ts'
 import { useAppSelector } from '../../../hooks/redux-hooks.ts'
-import { getUserIsNotDefined } from '../../../reducers/Auth/selectors/selectors.tsx'
+import { getUserIsNotDefined } from '../../../reducers/Auth/selectors/selectors.ts'
 
 export const FormLogin = ({ title, onSubmit }: Props) => {
     const {

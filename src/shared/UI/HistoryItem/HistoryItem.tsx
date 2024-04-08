@@ -1,7 +1,7 @@
 import { FunctionComponent, MouseEventHandler } from 'react'
 import { ApiQueryFiltersType } from '../../types/apiData.ts'
 import { Link } from '../Link/Link.tsx'
-import { SEARCH } from '../../../app/providers/router/routePaths/pathConstants.ts'
+import * as ROUTE_PATHS from '../../../app/providers/router/routePaths/pathConstants.ts'
 import { Button } from '../button/Button.tsx'
 import { useAppDispatch } from '../../hooks/redux-hooks.ts'
 import { deleteItemFromSearchHistory } from '../../reducers/History/slices/searchHistorySlice.ts'
@@ -31,7 +31,7 @@ export const HistoryItem: FunctionComponent<HistoryItemProps> = ({
             <Span>{'Видео формат: ' + filters.type}</Span>
             <RatingSpan>{'Рейтинг: ' + filters.ratingFrom}</RatingSpan>
             <Span>{'Минимальный год: ' + filters.yearFrom}</Span>
-            <Link to={`/${SEARCH}?${query}`} type={'route'}>
+            <Link to={`/${ROUTE_PATHS.SEARCH}?${query}`} type={'route'}>
                 Перейти
             </Link>
             <Button variant={'secondary'} onClick={buttonOnClickHandler}>

@@ -15,6 +15,7 @@ import {
 } from './header.styled.ts'
 import { ThemeContext } from '../../app/context/ThemeContext.tsx'
 import { FeatureContext } from '../../app/context/FeatureFlag.tsx'
+import * as ROUTE_PATHS from '../../app/providers/router/routePaths/pathConstants.ts'
 
 type HeaderProps = {
     username: string | null
@@ -34,7 +35,7 @@ const Header: FunctionComponent<HeaderProps> = ({
         <StyledHeader>
             <Container>
                 <LogoContainer>
-                    <Link type={'logo'} to={'/'}>
+                    <Link type={'logo'} to={ROUTE_PATHS.ROOT}>
                         <Image src={logo} />
                         <Span>Search Films</Span>
                     </Link>
@@ -49,13 +50,13 @@ const Header: FunctionComponent<HeaderProps> = ({
                 </LogoContainer>
                 {isAuth && (
                     <NavBar>
-                        <Link type={'route'} to={'/history'}>
+                        <Link type={'route'} to={ROUTE_PATHS.HISTORY}>
                             История
                         </Link>
-                        <Link type={'route'} to={'/search'}>
+                        <Link type={'route'} to={ROUTE_PATHS.SEARCH}>
                             Расширенный поиск
                         </Link>
-                        <Link type={'route'} to={'/favorites'}>
+                        <Link type={'route'} to={ROUTE_PATHS.FAVORITES}>
                             Избранное
                         </Link>
                     </NavBar>
@@ -71,10 +72,10 @@ const Header: FunctionComponent<HeaderProps> = ({
                     </Profile>
                 ) : (
                     <Profile>
-                        <Link to={'/login'} type={'route'}>
+                        <Link to={ROUTE_PATHS.LOGIN} type={'route'}>
                             Войти
                         </Link>
-                        <Link to={'/register'} type={'route'}>
+                        <Link to={ROUTE_PATHS.REGISTER} type={'route'}>
                             Регистрация
                         </Link>
                     </Profile>

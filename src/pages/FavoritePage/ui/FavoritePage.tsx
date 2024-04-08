@@ -3,15 +3,15 @@ import {
     useAppDispatch,
     useAppSelector,
 } from '../../../shared/hooks/redux-hooks.ts'
-import { getFavorites } from '../../../shared/reducers/Favorite/selectors/FavoriteSelectors.tsx'
+import { getFavorites } from '../../../shared/reducers/Favorite/selectors/FavoriteSelectors.ts'
 
 import { FilmCard } from '../../../shared/UI/FilmCard/FilmCard.tsx'
 import { FilmItem } from '../../../shared/types/apiData.ts'
 import { useNavigate } from 'react-router-dom'
-import { getUser } from '../../../shared/reducers/Auth/selectors/selectors.tsx'
+import { getUser } from '../../../shared/reducers/Auth/selectors/selectors.ts'
 import { useEffect } from 'react'
 import * as ROUTE_PATHS from '../../../app/providers/router/routePaths/pathConstants.ts'
-import { getFavoriteFromFirebaseDB } from '../../../shared/reducers/Favorite/actions/FavoriteActions.tsx'
+import { getFavoriteFromFirebaseDB } from '../../../shared/reducers/Favorite/actions/FavoriteActions.ts'
 import { Container } from '../../MainPage/ui/main.styled.ts'
 
 export const FavoritePage = () => {

@@ -7,7 +7,7 @@ import {
     addMovieToFavorite,
     removeFromMovieToFavorite,
     updateFavorite,
-} from '../slices/FavoriteSlices.tsx'
+} from '../slices/FavoriteSlices.ts'
 
 export const addMovieToFavoriteDB = createAsyncThunk(
     '@favorite/addMovieToFavorite',

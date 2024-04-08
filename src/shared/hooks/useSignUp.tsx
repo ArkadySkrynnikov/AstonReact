@@ -3,7 +3,7 @@ import {
     setEmailError,
     setPasswordError,
     setUser,
-} from '../reducers/Auth/slices/userSlice.tsx'
+} from '../reducers/Auth/slices/userSlice.ts'
 import { useAppDispatch } from './redux-hooks.ts'
 import { useNavigate } from 'react-router-dom'
 import { SubmitHandler } from 'react-hook-form'

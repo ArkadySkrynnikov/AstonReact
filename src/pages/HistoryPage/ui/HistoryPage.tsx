@@ -2,7 +2,7 @@ import {
     useAppDispatch,
     useAppSelector,
 } from '../../../shared/hooks/redux-hooks.ts'
-import { getUser } from '../../../shared/reducers/Auth/selectors/selectors.tsx'
+import { getUser } from '../../../shared/reducers/Auth/selectors/selectors.ts'
 import { FunctionComponent, ReactElement, useEffect } from 'react'
 import { getSearchHistory } from '../../../shared/reducers/History/selectors/selectors.ts'
 import { updateSearchHistory } from '../../../shared/reducers/History/slices/searchHistorySlice.ts'

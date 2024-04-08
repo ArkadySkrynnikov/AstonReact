@@ -10,11 +10,11 @@ import { FilmItem } from '../../types/apiData.ts'
 import fallbackImage from '../../../assets/images/default-fallback.png'
 import { Link } from '../Link/Link.tsx'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks.ts'
-import { getUser } from '../../reducers/Auth/selectors/selectors.tsx'
+import { getUser } from '../../reducers/Auth/selectors/selectors.ts'
 import {
     addMovieToFavoriteDB,
     removeMovieFromFavorites,
-} from '../../reducers/Favorite/actions/FavoriteActions.tsx'
+} from '../../reducers/Favorite/actions/FavoriteActions.ts'
 import { RenderButtons } from '../RenderButton/RenderButtons.tsx'
 import {
     FilmCardContainer,
@@ -31,7 +31,6 @@ import {
     updateFavoritesInStorage,
 } from '../../../features/utils/storageUtils.ts'
 import { FeatureContext } from '../../../app/context/FeatureFlag.tsx'
-import { GOTO_FILM_PAGE } from '../../../app/providers/router/routePaths/pathConstants.ts'
 
 type FilmCardProps = {
     film: FilmItem
@@ -64,7 +63,7 @@ export const FilmCard: FunctionComponent<FilmCardProps> = memo((props) => {
         updateFavoritesInStorage(user.id as string, film.kinopoiskId, false)
     }, [dispatch, film, user.id])
 
-    const urlToShare = `https://t.me/share/url?url=http://localhost:5173${GOTO_FILM_PAGE}${film.kinopoiskId}&text=${film.nameRu}`
+    const urlToShare = `https://t.me/share/url?url=http://localhost:5173${ROUTE_PATHS.GOTO_FILM_PAGE}${film.kinopoiskId}&text=${film.nameRu}`
 
     return (
         <FilmCardContainer>
@@ -104,9 +103,9 @@ export const FilmCard: FunctionComponent<FilmCardProps> = memo((props) => {
                         </Link>
                     )}
                     {isTelegramShareEnabled && (
-                    <Link type={'route'} to={urlToShare} target={'_blank'}>
-                        Поделиться
-                    </Link>
+                        <Link type={'route'} to={urlToShare} target={'_blank'}>
+                            Поделиться
+                        </Link>
                     )}
                 </FilmCardButton>
             </FilmContainer>

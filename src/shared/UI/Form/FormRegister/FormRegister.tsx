@@ -14,7 +14,7 @@ import { useAppSelector } from '../../../hooks/redux-hooks.ts'
 import {
     getEmailError,
     getPasswordError,
-} from '../../../reducers/Auth/selectors/selectors.tsx'
+} from '../../../reducers/Auth/selectors/selectors.ts'
 import { Link } from '../../Link/Link.tsx'
 import { Button } from '../../button/Button.tsx'
 

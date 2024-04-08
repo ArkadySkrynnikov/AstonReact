@@ -4,7 +4,7 @@ import {
     addMovieToFavoriteDB,
     getFavoriteFromFirebaseDB,
     removeMovieFromFavorites,
-} from '../actions/FavoriteActions.tsx'
+} from '../actions/FavoriteActions.ts'
 
 type FavoriteState = {
     movies: FilmItem[]

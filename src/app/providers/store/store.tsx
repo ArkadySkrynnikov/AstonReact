@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import userReducer from '../../../shared/reducers/Auth/slices/userSlice.tsx'
+import userReducer from '../../../shared/reducers/Auth/slices/userSlice.ts'
 import searchFilmByIdReducer from '../../../shared/reducers/Search/slices/searchByIdSlice.ts'
 import searchFilmsReducer from '../../../shared/reducers/Search/slices/searchSlice.ts'
-import userFavoriteReducer from '../../../shared/reducers/Favorite/slices/FavoriteSlices.tsx'
+import userFavoriteReducer from '../../../shared/reducers/Favorite/slices/FavoriteSlices.ts'
 import searchHistoryReducer from '../../../shared/reducers/History/slices/searchHistorySlice.ts'
 import featureSliceReducer from '../../../shared/reducers/Feature/slices/featureSlice.ts'
 import { FavoriteLogsMiddleware } from './middleware/middleware.ts'
-
 
 export const store = configureStore({
     reducer: {

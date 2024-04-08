@@ -28,15 +28,15 @@ import { getSuggestions } from '../../shared/reducers/Search/selectors/selectors
 import { useLocation, useNavigate } from 'react-router-dom'
 import { apiQueryFilters } from '../../shared/consts/apiQueryStrings.ts'
 import { fetchFilmsSuggestions } from '../../shared/reducers/Search/slices/searchSlice.ts'
-import { SEARCH } from '../../app/providers/router/routePaths/pathConstants.ts'
 import { Select } from '../../shared/UI/Select/Select.tsx'
 import {
     orderTypes,
     ratingValues,
     videoTypes,
 } from '../../shared/consts/filterValues.ts'
-import { getUser } from '../../shared/reducers/Auth/selectors/selectors.tsx'
+import { getUser } from '../../shared/reducers/Auth/selectors/selectors.ts'
 import { saveSearchHistory } from '../../shared/reducers/History/slices/searchHistorySlice.ts'
+import * as ROUTE_PATHS from '../../app/providers/router/routePaths/pathConstants.ts'
 
 export const Search: FunctionComponent = (): ReactElement => {
     const { data } = useAppSelector(getSuggestions)
@@ -121,7 +121,7 @@ export const Search: FunctionComponent = (): ReactElement => {
         }
 
         if (location.pathname === '/') {
-            navigate(`${SEARCH}?${queryString}`)
+            navigate(`${ROUTE_PATHS.SEARCH}?${queryString}`)
         } else {
             navigate({ search: queryString })
         }

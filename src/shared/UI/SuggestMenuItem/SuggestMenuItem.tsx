@@ -7,10 +7,14 @@ import {
     RatingSpan,
     YearSpan,
 } from './SuggestMenuItem.styled.ts'
+import * as ROUTE_PATHS from '../../../app/providers/router/routePaths/pathConstants.ts'
 
 const SuggestMenuItem: FunctionComponent<FilmItem> = (film): ReactElement => {
     return (
-        <Link to={`filmPage/${film.kinopoiskId}`} type={'suggestItem'}>
+        <Link
+            to={`${ROUTE_PATHS.GOTO_FILM_PAGE}${film.kinopoiskId}`}
+            type={'suggestItem'}
+        >
             <Container>
                 <RatingSpan>
                     {film.ratingKinopoisk || film.ratingImdb}
