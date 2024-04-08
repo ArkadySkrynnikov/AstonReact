@@ -4,6 +4,7 @@ import searchFilmByIdReducer from '../../../shared/reducers/Search/slices/search
 import searchFilmsReducer from '../../../shared/reducers/Search/slices/searchSlice.ts'
 import userFavoriteReducer from '../../../shared/reducers/Favorite/slices/FavoriteSlices.tsx'
 import searchHistoryReducer from '../../../shared/reducers/History/slices/searchHistorySlice.ts'
+import { FavoriteLogsMiddleware } from './middleware/middleware.ts'
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,19 @@ export const store = configureStore({
         favorite: userFavoriteReducer,
         searchHistory: searchHistoryReducer,
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    '@favorite/addMovieToFavorite/fulfilled',
+                    '@favorite/addMovieToFavorite/rejected',
+                    '@favorite/removeMovieFromFavorite/fulfilled',
+                    '@favorite/removeMovieFromFavorite/rejected',
+                    '@favorite/getFavoriteFromFirebaseDB/fulfilled',
+                    '@favorite/getFavoriteFromFirebaseDB/rejected',
+                ],
+            },
+        }).concat(FavoriteLogsMiddleware.middleware),
 })
 
 export type AppDispatch = typeof store.dispatch
