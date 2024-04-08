@@ -1,5 +1,9 @@
 import styled from 'styled-components'
-import { FunctionComponent, ReactElement } from 'react'
+import {
+    FunctionComponent,
+    HTMLAttributeAnchorTarget,
+    ReactElement,
+} from 'react'
 import { baseTheme } from '../../../app/styles/theme.ts'
 import { Link as RouterLink } from 'react-router-dom'
 
@@ -103,15 +107,17 @@ type LinkProps = {
     to: string
     children: ReactElement | string | ReactElement[]
     type: 'logo' | 'route' | 'suggestItem'
+    target?: HTMLAttributeAnchorTarget
 }
 
 export const Link: FunctionComponent<LinkProps> = ({
     to,
     children,
     type,
+    target,
 }): ReactElement => {
     return (
-        <StyledLink $type={type} to={to}>
+        <StyledLink $type={type} to={to} target={target}>
             {children}
         </StyledLink>
     )

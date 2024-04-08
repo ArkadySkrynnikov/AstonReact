@@ -4,7 +4,9 @@ import searchFilmByIdReducer from '../../../shared/reducers/Search/slices/search
 import searchFilmsReducer from '../../../shared/reducers/Search/slices/searchSlice.ts'
 import userFavoriteReducer from '../../../shared/reducers/Favorite/slices/FavoriteSlices.tsx'
 import searchHistoryReducer from '../../../shared/reducers/History/slices/searchHistorySlice.ts'
+import featureSliceReducer from '../../../shared/reducers/Feature/slices/featureSlice.ts'
 import { FavoriteLogsMiddleware } from './middleware/middleware.ts'
+
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +15,7 @@ export const store = configureStore({
         searchFilms: searchFilmsReducer,
         favorite: userFavoriteReducer,
         searchHistory: searchHistoryReducer,
+        feature: featureSliceReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

@@ -7,3 +7,7 @@ export const GOTO_FILM_PAGE = '/filmPage/'
 export const LOGIN = '/login'
 export const REGISTER = '/register'
 export const NOT_FOUND = '*'
+
+export const API_GET_FEATURE = '/api/feature-flags'
+export const API_URL = 'http://localhost:3000'
+export const APP_URL = 'http://localhost:5173'
