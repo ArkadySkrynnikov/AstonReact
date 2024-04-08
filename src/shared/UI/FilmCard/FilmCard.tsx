@@ -93,7 +93,7 @@ export const FilmCard: FunctionComponent<FilmCardProps> = memo((props) => {
                     </Link>
                 )}
                 {isTelegramShareEnabled && (
-                    <Link type={'route'} to={urlToShare}>
+                    <Link type={'route'} to={urlToShare} target={'_blank'}>
                         Поделиться
                     </Link>
                 )}
